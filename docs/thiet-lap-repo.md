@@ -17,6 +17,7 @@ Quản trị viên GitHub của HVN GROUP thực hiện các bước dưới đ�
   - Chỉ cho squash merge; bật merge queue.
   - Hủy approval khi có commit mới; áp dụng cho cả admin.
 - **Environment `public-mirror`:** chỉ nhánh `main` được dùng. Thêm secret `PUBLIC_MIRROR_DEPLOY_KEY`, là khóa riêng của deploy key.
+- **GitHub Packages:** trong Organization settings > Packages, cho phép thành viên tạo package riêng tư. Lần đầu workflow `deploy` push `ghcr.io/hvngroup/hvn-ai-mcp`, vào package đó > Package settings > Manage Actions access và thêm repo staging với quyền Write nếu chưa có.
 - **Environment `staging` và `production`** (dùng cho deploy MCP): mục Deployment branches chỉ cho `main`. Riêng `production` bắt buộc 1 người duyệt.
 
 ## `hvngroup/hvn-ai-marketplace` (công khai)

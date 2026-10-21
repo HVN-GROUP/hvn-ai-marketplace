@@ -27,6 +27,10 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.PUBLIC_MIRROR_DEPLOY_KEY }}
         run: |
+          if [ -z "$DEPLOY_KEY" ]; then
+            echo "::error::Chưa cấu hình secret PUBLIC_MIRROR_DEPLOY_KEY trong environment public-mirror (xem docs/thiet-lap-repo.md)."
+            exit 1
+          fi
           install -m 700 -d ~/.ssh
           printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/mirror_key
           chmod 600 ~/.ssh/mirror_key
