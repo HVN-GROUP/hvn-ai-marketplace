@@ -1,0 +1,36 @@
+name: mirror
+
+# Sau mỗi merge vào main của repo staging (riêng tư), đẩy nguyên main sang repo công khai.
+# Repo công khai không nhận PR và không ai push tay; đây là con đường duy nhất.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging'
+    runs-on: ubuntu-latest
+    environment: public-mirror
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Push main sang hvngroup/hvn-ai-marketplace
+        env:
+          DEPLOY_KEY: ${{ secrets.PUBLIC_MIRROR_DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/mirror_key
+          chmod 600 ~/.ssh/mirror_key
+          # Host key công bố tại docs.github.com (GitHub's SSH key fingerprints); không tin ssh-keyscan.
+          echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > ~/.ssh/known_hosts
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/mirror_key -o IdentitiesOnly=yes -o HostKeyAlgorithms=ssh-ed25519 -o StrictHostKeyChecking=yes"
+          git push git@github.com:hvngroup/hvn-ai-marketplace.git HEAD:refs/heads/main

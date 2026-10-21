@@ -1,0 +1,26 @@
+# Mặc định: nhóm kỹ thuật.
+*                               @hvngroup/hvn-ai-tech
+
+# Nội dung: 1 biên tập viên Content (#Valkyrie) + 1 kỹ thuật viên Service (#Witch).
+/content/                       @hvngroup/hvn-ai-content
+/evals/                         @hvngroup/hvn-ai-content
+
+# Nội dung tuân thủ: HVN Security bắt buộc duyệt.
+# Dòng khớp sau cùng thắng, nên liệt kê lại nhóm nội dung.
+/content/**/tuan-thu-*/         @hvngroup/hvn-ai-content @hvngroup/hvn-security
+
+# File sinh tự động: chỉ đổi qua build, vẫn cần nhóm kỹ thuật xác nhận.
+/plugins/                       @hvngroup/hvn-ai-tech
+/.claude-plugin/                @hvngroup/hvn-ai-tech
+
+# Hạ tầng và cổng kiểm tra: nhóm kỹ thuật cùng người phụ trách bảo mật.
+/.github/                       @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/scripts/                       @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/shared/                        @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/server/                        @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/config/                        @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/catalog/                       @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/deploy/                        @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/Dockerfile                     @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/package.json                   @hvngroup/hvn-ai-tech @hvngroup/hvn-security
+/package-lock.json              @hvngroup/hvn-ai-tech @hvngroup/hvn-security

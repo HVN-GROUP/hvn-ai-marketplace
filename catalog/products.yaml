@@ -1,0 +1,91 @@
+# Catalog công khai của HVN GROUP cho plugin AI.
+# - Chỉ thông tin công khai. KHÔNG có giá, KHÔNG có giá gốc vendor.
+# - `url` phải là TRANG THÔNG TIN (không phải giỏ hàng/thanh toán).
+# - Sản phẩm không có `url` dùng trang chủ thương hiệu cho tới khi Marketing xác nhận trang riêng.
+# - Mọi `needs` phải thuộc danh sách `needs` bên dưới (check.ts kiểm tra).
+
+needs:
+  - { id: giao-tiep-cong-tac, label: "Giao tiếp và cộng tác nội bộ" }
+  - { id: email-doanh-nghiep, label: "Email doanh nghiệp và tên miền" }
+  - { id: luu-tru-dam-may, label: "Lưu trữ và chia sẻ dữ liệu đám mây" }
+  - { id: hop-truc-tuyen, label: "Hội họp trực tuyến" }
+  - { id: quan-ly-cong-viec, label: "Quản lý công việc và dự án" }
+  - { id: quan-ly-khach-hang, label: "Quản lý khách hàng (CRM)" }
+  - { id: email-marketing, label: "Email marketing" }
+  - { id: marketing-so, label: "Marketing số và quảng cáo" }
+  - { id: website, label: "Website và landing page" }
+  - { id: ha-tang-dam-may, label: "Hạ tầng đám mây và máy chủ" }
+  - { id: sao-luu-du-lieu, label: "Sao lưu và khôi phục dữ liệu" }
+  - { id: bao-mat-thiet-bi, label: "Bảo mật thiết bị đầu cuối" }
+  - { id: chung-chi-ssl, label: "Chứng chỉ SSL và tin cậy số" }
+  - { id: quan-ly-mat-khau, label: "Quản lý mật khẩu và danh tính" }
+  - { id: tuan-thu-du-lieu, label: "Tuân thủ bảo vệ dữ liệu" }
+  - { id: ung-dung-ai, label: "Ứng dụng AI trong doanh nghiệp" }
+  - { id: tu-dong-hoa, label: "Tự động hóa quy trình" }
+  - { id: phan-tich-du-lieu, label: "Phân tích dữ liệu và BI" }
+  - { id: ban-quyen-phan-mem, label: "Bản quyền phần mềm" }
+  - { id: dao-tao-chuyen-doi-so, label: "Đào tạo chuyển đổi số" }
+  - { id: tong-dai-cskh, label: "Tổng đài và chăm sóc khách hàng" }
+  - { id: chu-ky-email, label: "Chữ ký email thương hiệu" }
+
+brands:
+  - { id: hvn, name: "HVN GROUP", url: "https://hvn.vn", summary: "Giải pháp và dịch vụ nền tảng số cho doanh nghiệp" }
+  - { id: gcs, name: "GCS.VN", url: "https://gcs.vn", summary: "Đối tác cấp cao Google Cloud: Google Workspace, lưu trữ, hội họp" }
+  - { id: mso, name: "MSO.VN", url: "https://mso.vn", summary: "Đối tác Microsoft: Microsoft 365, Azure" }
+  - { id: zhs, name: "ZHS.VN", url: "https://zhs.vn", summary: "Đối tác Zoho: CRM, Workplace, quản trị doanh nghiệp" }
+  - { id: webnet, name: "WEB.NET.VN", url: "https://web.net.vn", summary: "Website low-code tạo trong một cú nhấp" }
+  - { id: fdm, name: "FDM.VN", url: "https://fdm.vn", summary: "Dịch vụ Digital Marketing trọn gói" }
+  - { id: cke, name: "CKE.VN", url: "https://cke.vn", summary: "Chữ ký email doanh nghiệp" }
+  - { id: emx, name: "EMX.VN", url: "https://emx.vn", summary: "Giải pháp Email Marketing" }
+  - { id: tdo, name: "TDO.VN", url: "https://tdo.vn", summary: "Tổng đài chăm sóc khách hàng" }
+  - { id: lic, name: "LIC.VN", url: "https://lic.vn", summary: "Bản quyền phần mềm chính hãng" }
+  - { id: dxt, name: "DXT.VN", url: "https://dxt.vn", summary: "Khóa học trực tuyến chuyển đổi số" }
+  - { id: etg, name: "ETG.VN", url: "https://etg.vn", summary: "Email Track for Gmail" }
+  - { id: uix, name: "UIX.VN", url: "https://uix.vn", summary: "Kho mẫu slide template" }
+  - { id: asx, name: "ASX.VN", url: "https://asx.vn", summary: "Tự động hóa Google Sheets" }
+  - { id: cer, name: "CER.VN", url: "https://cer.vn", summary: "Chứng chỉ bảo mật SSL cho website" }
+
+products:
+  - { id: google-workspace, brand: gcs, name: "Google Workspace", summary: "Gmail tên miền riêng, Drive, Meet, Docs cho doanh nghiệp", needs: [email-doanh-nghiep, giao-tiep-cong-tac, luu-tru-dam-may, hop-truc-tuyen] }
+  - { id: gemini-workspace, brand: gcs, name: "Gemini cho Google Workspace", summary: "Trợ lý AI ngay trong Gmail, Docs, Sheets và Meet", needs: [ung-dung-ai] }
+  - { id: microsoft-365, brand: mso, name: "Microsoft 365", summary: "Outlook, Teams, OneDrive, SharePoint và bộ Office cho doanh nghiệp", needs: [email-doanh-nghiep, giao-tiep-cong-tac, luu-tru-dam-may, hop-truc-tuyen] }
+  - { id: microsoft-365-copilot, brand: mso, name: "Microsoft 365 Copilot", summary: "Trợ lý AI trong Word, Excel, Outlook và Teams", needs: [ung-dung-ai] }
+  - { id: zoho-crm, brand: zhs, name: "Zoho CRM", summary: "Quản lý khách hàng, pipeline bán hàng và chăm sóc sau bán", needs: [quan-ly-khach-hang] }
+  - { id: claude-doanh-nghiep, brand: lic, name: "Claude cho doanh nghiệp", summary: "Trợ lý AI Claude gói Team và Enterprise cho đội ngũ", needs: [ung-dung-ai] }
+  - { id: acronis-cyber-protect, brand: lic, name: "Acronis Cyber Protect", summary: "Sao lưu và khôi phục máy chủ, máy trạm, Microsoft 365, Google Workspace", needs: [sao-luu-du-lieu] }
+  - { id: kaspersky-endpoint, brand: lic, name: "Kaspersky Endpoint Security", summary: "Bảo vệ máy tính và máy chủ khỏi mã độc, ransomware", needs: [bao-mat-thiet-bi] }
+  - { id: onepassword-business, brand: lic, name: "1Password Business", summary: "Quản lý và chia sẻ mật khẩu an toàn cho đội ngũ", needs: [quan-ly-mat-khau] }
+  - { id: ban-quyen-phan-mem, brand: lic, name: "Bản quyền phần mềm doanh nghiệp", summary: "Adobe, Microsoft, Autodesk, JetBrains và nhiều hãng khác", needs: [ban-quyen-phan-mem] }
+  - { id: chung-chi-ssl, brand: cer, name: "Chứng chỉ SSL", summary: "Chứng chỉ SSL DV, OV, EV từ Sectigo, GlobalSign, DigiCert", needs: [chung-chi-ssl] }
+  - { id: email-marketing, brand: emx, name: "EMX Email Marketing", summary: "Gửi email marketing số lượng lớn, đo lường mở và nhấp", needs: [email-marketing] }
+  - { id: chu-ky-email, brand: cke, name: "CKE Chữ ký email", summary: "Chữ ký email đồng bộ thương hiệu cho toàn công ty", needs: [chu-ky-email] }
+  - { id: tong-dai-ao, brand: tdo, name: "TDO Tổng đài", summary: "Tổng đài ảo chăm sóc khách hàng", needs: [tong-dai-cskh] }
+  - { id: website-low-code, brand: webnet, name: "WEB.NET.VN", summary: "Tạo website doanh nghiệp không cần lập trình", needs: [website] }
+  - { id: digital-marketing, brand: fdm, name: "FDM Digital Marketing", summary: "Quảng cáo, SEO và nội dung trọn gói", needs: [marketing-so] }
+  - { id: khoa-hoc-chuyen-doi-so, brand: dxt, name: "Khóa học DXT", summary: "Khóa học trực tuyến về công cụ số và AI cho doanh nghiệp", needs: [dao-tao-chuyen-doi-so, ung-dung-ai] }
+  - { id: email-track-gmail, brand: etg, name: "Email Track for Gmail", summary: "Theo dõi lượt mở email gửi từ Gmail", needs: [email-doanh-nghiep] }
+  - { id: tu-dong-hoa-sheets, brand: asx, name: "Automated Sheets X", summary: "Tự động hóa và báo cáo trên Google Sheets", needs: [tu-dong-hoa, phan-tich-du-lieu] }
+
+solutions:
+  - { id: S01, name: "Giao tiếp & Cộng tác doanh nghiệp", components: "Email + Quản lý công việc + Lưu trữ đám mây + Hội họp + Chat", needs: [giao-tiep-cong-tac, hop-truc-tuyen] }
+  - { id: S02, name: "Email & Tên miền thương hiệu", components: "Email doanh nghiệp + Tên miền & DNS + Email Hosting", needs: [email-doanh-nghiep] }
+  - { id: S03, name: "Quản lý công việc & Dự án", components: "Quản lý công việc + Tự động hóa + No-code/Low-code", needs: [quan-ly-cong-viec] }
+  - { id: S04, name: "Lưu trữ & Chia sẻ dữ liệu đám mây", components: "Lưu trữ đám mây + Sao lưu & Phục hồi", needs: [luu-tru-dam-may] }
+  - { id: S05, name: "Hội họp & Cộng tác trực tuyến", components: "Hội họp + Chat + Tổng đài ảo", needs: [hop-truc-tuyen] }
+  - { id: S06, name: "Chuyển đổi số toàn diện", components: "S01 + S02 + S03 + Tư vấn chuyển đổi số", needs: [giao-tiep-cong-tac, dao-tao-chuyen-doi-so] }
+  - { id: S07, name: "CRM & Quản lý quan hệ khách hàng", components: "CRM + Email Marketing & Automation + Tự động hóa", needs: [quan-ly-khach-hang] }
+  - { id: S08, name: "Digital Marketing toàn diện", components: "Quảng cáo + SEO + Google Maps + Email Marketing + SMS + Content", needs: [marketing-so, email-marketing] }
+  - { id: S09, name: "Trải nghiệm khách hàng 360°", components: "Helpdesk + Chat + Tổng đài + AI chatbot", needs: [tong-dai-cskh] }
+  - { id: S10, name: "Điện toán đám mây & Hạ tầng", components: "Cloud + VPS/Server + Migration + Quản trị máy chủ", needs: [ha-tang-dam-may] }
+  - { id: S11, name: "Website & Hosting trọn gói", components: "Tên miền + Hosting + Thiết kế website + Bảo trì", needs: [website] }
+  - { id: S12, name: "Bảo mật dữ liệu toàn diện", components: "Endpoint + Backup & DR + Password vault + Firewall", needs: [bao-mat-thiet-bi, sao-luu-du-lieu, quan-ly-mat-khau] }
+  - { id: S13, name: "Sao lưu & Khôi phục thảm họa", components: "Backup & DR + Cloud, cam kết RPO/RTO rõ ràng", needs: [sao-luu-du-lieu] }
+  - { id: S14, name: "Zero Trust & Quản lý thiết bị", components: "Zero Trust & Identity + MDM + Password management", needs: [quan-ly-mat-khau, bao-mat-thiet-bi] }
+  - { id: S15, name: "Tin cậy số (Digital Trust)", components: "SSL/TLS + Code Signing + PKI", needs: [chung-chi-ssl] }
+  - { id: S16, name: "An toàn thông tin doanh nghiệp", components: "VAPT & Compliance + SOC 24/7 + Bảo mật toàn diện + Zero Trust", needs: [tuan-thu-du-lieu, bao-mat-thiet-bi] }
+  - { id: S17, name: "Tự động hóa & Tích hợp quy trình", components: "iPaaS + RPA + No-code/Low-code", needs: [tu-dong-hoa] }
+  - { id: S18, name: "AI cho doanh nghiệp", components: "AI chatbot/trợ lý ảo + BI + Tự động hóa", needs: [ung-dung-ai] }
+  - { id: S19, name: "Phân tích dữ liệu doanh nghiệp", components: "BI + Cloud + AI, dashboard thời gian thực", needs: [phan-tich-du-lieu] }
+  - { id: S20, name: "Quản lý dịch vụ IT (ITSM)", components: "IT Helpdesk + Hỗ trợ từ xa + Device Management", needs: [bao-mat-thiet-bi] }
+  - { id: S21, name: "Quản trị nhân sự số", components: "HRM + Quản lý công việc + Tự động hóa", needs: [quan-ly-cong-viec, tu-dong-hoa] }
+  - { id: S22, name: "Thiết kế & Phát triển Website", components: "Website + Landing Page + UX/UI + Tên miền + Hosting", needs: [website] }

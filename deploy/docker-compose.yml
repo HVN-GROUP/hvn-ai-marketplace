@@ -1,0 +1,28 @@
+# Đặt tại /opt/hvn-mcp trên VPS (staging và production dùng chung file, khác .env).
+services:
+  mcp:
+    image: ghcr.io/hvngroup/hvn-ai-mcp:${IMAGE_TAG:?đặt IMAGE_TAG}
+    restart: unless-stopped
+    environment:
+      MCP_ALLOWED_HOSTS: ${MCP_ALLOWED_HOSTS:?đặt MCP_ALLOWED_HOSTS}
+      MCP_REQUESTS_PER_MINUTE: ${MCP_REQUESTS_PER_MINUTE:-600}
+      MCP_MAX_CONCURRENT: ${MCP_MAX_CONCURRENT:-50}
+      OPENAI_DOMAIN_TOKEN: ${OPENAI_DOMAIN_TOKEN:-}
+    expose: ["3000"]
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      MCP_DOMAIN: ${MCP_DOMAIN:?đặt MCP_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+volumes:
+  caddy_data:

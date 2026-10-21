@@ -1,0 +1,44 @@
+# Domain ngoài HVN được phép xuất hiện (link hoặc tên miền) trong nội dung nguồn.
+# Khớp theo hậu tố: "google.com" cho phép cả "support.google.com".
+# Domain HVN lấy từ catalog/products.yaml (brands[].url) và KHÔNG được link tay trong nội dung.
+domains:
+  # Anthropic / Claude
+  - anthropic.com
+  - claude.ai
+  - claude.com
+  # OpenAI / ChatGPT
+  - openai.com
+  - chatgpt.com
+  # Google
+  - google.com
+  - workspace.google.com
+  - googleblog.com
+  # Microsoft
+  - microsoft.com
+  - office.com
+  - microsoft365.com
+  # Bảo mật
+  - acronis.com
+  - kaspersky.com
+  - sectigo.com
+  - globalsign.com
+  - digicert.com
+  - letsencrypt.org
+  - 1password.com
+  # Zoho
+  - zoho.com
+  # Văn bản pháp luật chính thức
+  - chinhphu.vn
+  - vanban.chinhphu.vn
+  - thuvienphapluat.vn
+  - luatvietnam.vn
+  - mic.gov.vn
+  - mps.gov.vn
+  # Tiêu chuẩn kỹ thuật
+  - ietf.org
+  - rfc-editor.org
+# Domain mẫu được phép dùng trong ví dụ.
+example_domains:
+  - example.com
+  - example.vn
+  - congty-mau.vn

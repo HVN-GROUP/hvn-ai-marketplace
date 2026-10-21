@@ -1,0 +1,16 @@
+# Truy vấn tiếng Việt (có dấu, không dấu, viết tắt) và tài liệu kỳ vọng nằm trong top 3.
+- { q: "lộ trình 90 ngày dùng Claude", id: hvn-claude.bat-dau-voi-claude.lo-trinh-90-ngay }
+- { q: "bat dau dung claude trong doanh nghiep the nao", id: hvn-claude.bat-dau-voi-claude.lo-trinh-90-ngay }
+- { q: "cách viết prompt tiếng Việt", id: hvn-claude.bat-dau-voi-claude.viet-prompt-tieng-viet }
+- { q: "mau prompt tom tat bien ban hop", id: hvn-claude.bat-dau-voi-claude.viet-prompt-tieng-viet }
+- { q: "chia se project cho dong nghiep", id: hvn-claude.claude-projects.tao-va-chia-se-project }
+- { q: "tạo Project cho cả nhóm", id: hvn-claude.claude-projects.tao-va-chia-se-project }
+- { q: "claude cho phong sales", id: hvn-claude.claude-projects.projects-cho-phong-sales }
+- { q: "soạn email chào hàng", id: hvn-claude.claude-projects.projects-cho-phong-sales }
+- { q: "them thanh vien claude team", id: hvn-claude.quan-tri-claude-team.them-thanh-vien-team }
+- { q: "lời mời hết hạn", id: hvn-claude.quan-tri-claude-team.them-thanh-vien-team }
+- { q: "chon goi claude team hay enterprise", id: hvn-claude.quan-tri-claude-team.chon-goi-claude }
+- { q: "luat bao ve du lieu ca nhan", id: hvn-claude.tuan-thu-claude.du-lieu-ca-nhan-khi-dung-claude }
+- { q: "Nghị định 356", id: hvn-claude.tuan-thu-claude.du-lieu-ca-nhan-khi-dung-claude }
+- { q: "chuyển đổi số nên bắt đầu từ đâu", id: hvn-advisor.tu-van-giai-phap-hvn.quy-trinh-tu-van }
+- { q: "gg workspace hay m365", id: hvn-advisor.chon-goi-phu-hop.chon-goi-theo-quy-mo }

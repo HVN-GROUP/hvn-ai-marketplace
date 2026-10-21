@@ -1,0 +1,59 @@
+name: deploy
+
+# Merge vào main → build image (tag = git SHA) → staging + smoke test → production (cần duyệt).
+# main chỉ nhận commit đã qua CI (branch protection + merge queue), nên deploy không chạy lại test.
+# Hai environment staging/production phải giới hạn "Deployment branches" = main (docs/thiet-lap-repo.md).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Build và push ghcr.io/hvngroup/hvn-ai-mcp:${{ github.sha }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "$GH_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker build -t ghcr.io/hvngroup/hvn-ai-mcp:${{ github.sha }} .
+          docker push ghcr.io/hvngroup/hvn-ai-mcp:${{ github.sha }}
+
+  staging:
+    needs: image
+    runs-on: ubuntu-latest
+    environment: staging
+    concurrency: { group: deploy-staging, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Deploy staging
+        env: { DEPLOY_HOST: '${{ secrets.DEPLOY_HOST }}', DEPLOY_USER: '${{ secrets.DEPLOY_USER }}', DEPLOY_SSH_KEY: '${{ secrets.DEPLOY_SSH_KEY }}', DEPLOY_KNOWN_HOSTS: '${{ secrets.DEPLOY_KNOWN_HOSTS }}' }
+        run: sh deploy/remote-deploy.sh "${{ github.sha }}"
+      - run: sh deploy/smoke.sh "${{ vars.MCP_BASE_URL }}"
+
+  production:
+    needs: staging
+    runs-on: ubuntu-latest
+    environment: production # bắt buộc người duyệt (cấu hình trong Settings > Environments)
+    concurrency: { group: deploy-production, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Deploy production
+        env: { DEPLOY_HOST: '${{ secrets.DEPLOY_HOST }}', DEPLOY_USER: '${{ secrets.DEPLOY_USER }}', DEPLOY_SSH_KEY: '${{ secrets.DEPLOY_SSH_KEY }}', DEPLOY_KNOWN_HOSTS: '${{ secrets.DEPLOY_KNOWN_HOSTS }}' }
+        run: sh deploy/remote-deploy.sh "${{ github.sha }}"
+      - run: sh deploy/smoke.sh "${{ vars.MCP_BASE_URL }}"

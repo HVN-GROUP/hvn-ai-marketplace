@@ -1,0 +1,34 @@
+# 30 câu hỏi thực tế; `skill` là skill kỳ vọng được Claude chọn.
+# Chạy với cả 7 plugin đã cài. Ngưỡng: chọn đúng skill ≥ 80%, có khối gợi ý ≥ 90%.
+plugin: hvn-claude
+questions:
+  - { q: "Công ty tôi mới mua Claude Team, tuần đầu nên làm gì?", skill: bat-dau-voi-claude }
+  - { q: "Có lộ trình nào để cả công ty dùng Claude bài bản trong 3 tháng không?", skill: bat-dau-voi-claude }
+  - { q: "Làm sao viết yêu cầu để Claude trả lời đúng ý hơn?", skill: bat-dau-voi-claude }
+  - { q: "Cho tôi mẫu prompt tiếng Việt để tóm tắt biên bản họp", skill: bat-dau-voi-claude }
+  - { q: "Claude trả lời chung chung quá, tôi nên hỏi thế nào?", skill: bat-dau-voi-claude }
+  - { q: "Nhân viên mới dùng Claude nên bắt đầu từ đâu?", skill: bat-dau-voi-claude }
+  - { q: "Đo hiệu quả dùng Claude sau 3 tháng như thế nào?", skill: bat-dau-voi-claude }
+  - { q: "Projects trong Claude là gì và dùng để làm gì?", skill: claude-projects }
+  - { q: "Làm sao tạo một Project cho phòng kế toán?", skill: claude-projects }
+  - { q: "Chia sẻ Project Claude cho đồng nghiệp thế nào?", skill: claude-projects }
+  - { q: "Phòng sales nên dùng Claude Projects ra sao?", skill: claude-projects }
+  - { q: "Soạn email chào hàng bằng Claude cho cả phòng kinh doanh dùng chung", skill: claude-projects }
+  - { q: "Project instructions nên viết gì?", skill: claude-projects }
+  - { q: "Claude không dùng tài liệu tôi đã tải lên Project, sửa sao?", skill: claude-projects }
+  - { q: "Đồng nghiệp không thấy Project tôi tạo", skill: claude-projects }
+  - { q: "Làm sao thêm nhân viên vào tài khoản Claude Team?", skill: quan-tri-claude-team }
+  - { q: "Nhân viên nghỉ việc thì gỡ khỏi Claude thế nào?", skill: quan-tri-claude-team }
+  - { q: "Lời mời Claude Team hết hạn sau bao lâu?", skill: quan-tri-claude-team }
+  - { q: "Sao báo hết chỗ ngồi dù chưa đủ người?", skill: quan-tri-claude-team }
+  - { q: "Công ty 20 người nên chọn gói Claude nào?", skill: quan-tri-claude-team }
+  - { q: "Claude Team khác Enterprise ở điểm nào?", skill: quan-tri-claude-team }
+  - { q: "Khi nào cần nâng lên Claude Enterprise?", skill: quan-tri-claude-team }
+  - { q: "Không gửi được lời mời thành viên Claude, lỗi do đâu?", skill: quan-tri-claude-team }
+  - { q: "Đưa dữ liệu khách hàng vào Claude có vi phạm luật không?", skill: tuan-thu-claude }
+  - { q: "Luật bảo vệ dữ liệu cá nhân 2025 ảnh hưởng gì khi dùng AI?", skill: tuan-thu-claude }
+  - { q: "Quy tắc nội bộ khi nhân viên dùng Claude nên có gì?", skill: tuan-thu-claude }
+  - { q: "Làm sao ẩn danh dữ liệu trước khi hỏi Claude?", skill: tuan-thu-claude }
+  - { q: "Nghị định 356/2025 yêu cầu doanh nghiệp làm gì với dữ liệu cá nhân?", skill: tuan-thu-claude }
+  - { q: "Có được tải hồ sơ nhân viên lên Claude không?", skill: tuan-thu-claude }
+  - { q: "Checklist bảo mật khi triển khai Claude cho công ty", skill: tuan-thu-claude }

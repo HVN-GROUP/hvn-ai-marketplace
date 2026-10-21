@@ -1,0 +1,30 @@
+# Nguồn duy nhất cho kênh phát hành, mức up-sell và quy ước UTM.
+# - build.ts dùng kênh `claude` để sinh plugin.
+# - server MCP chỉ mở các kênh có `mcp: true`.
+# - Thêm kênh mới = thêm vào `channels` và `utm.source_enum`.
+channels:
+  claude:
+    upsell: strong
+    max_items: 3
+    utm_source: claude
+  chatgpt:
+    upsell: relevant
+    max_items: 1
+    utm_source: chatgpt
+    mcp: true
+    exclude_types: [chon-goi]      # Validation Log Session 1: chính sách OpenAI về hiển thị gói
+    tools_disabled: []             # dự phòng: [recommend_solutions]
+  email:
+    utm_source: email
+    utm_medium: whmcs              # link trong mẫu email WHMCS (admin sửa tay)
+  zalo:
+    utm_source: zalo
+    utm_medium: zalo-oa            # broadcast Zalo OA
+utm:
+  medium: ai-plugin
+  source_enum: [claude, chatgpt, email, zalo]
+  medium_enum: [ai-plugin, whmcs, zalo-oa]
+  advisor_campaign: hvn-advisor    # utm_campaign của recommend_solutions
+  recommend_content: recommend     # utm_content của recommend_solutions
+  email_campaign: ai-plugin-onboarding
+  pattern: "^[a-z0-9.-]{1,64}$"

@@ -1,0 +1,42 @@
+name: freshness
+
+# Hằng tháng cập nhật MỘT issue ghim liệt kê nội dung quá hạn duyệt lại.
+on:
+  schedule:
+    - cron: '23 1 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  report:
+    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Cập nhật issue "Nội dung quá hạn duyệt lại"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/check.ts 2> check.log || true
+          {
+            echo "Cập nhật tự động lúc $(date -u +%Y-%m-%d). Người duyệt theo plugin xem CODEOWNERS."
+            echo
+            grep '\[freshness\]' check.log | sed 's/^cảnh báo \[freshness\] /- /' || echo "Không có nội dung quá hạn."
+          } > body.md
+          gh label create freshness --color FFC107 --force
+          number=$(gh issue list --label freshness --state open --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file body.md
+          else
+            gh issue create --title "Nội dung quá hạn duyệt lại" --label freshness --body-file body.md
+          fi
