@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   mirror:
-    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging'
+    if: github.repository == 'HVN-GROUP/hvn-ai-marketplace-staging'
     runs-on: ubuntu-latest
     environment: public-mirror
     steps:
@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Push main sang hvngroup/hvn-ai-marketplace
+      - name: Push main sang HVN-GROUP/hvn-ai-marketplace
         env:
           DEPLOY_KEY: ${{ secrets.PUBLIC_MIRROR_DEPLOY_KEY }}
         run: |
@@ -37,4 +37,4 @@ jobs:
           # Host key công bố tại docs.github.com (GitHub's SSH key fingerprints); không tin ssh-keyscan.
           echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > ~/.ssh/known_hosts
           export GIT_SSH_COMMAND="ssh -i ~/.ssh/mirror_key -o IdentitiesOnly=yes -o HostKeyAlgorithms=ssh-ed25519 -o StrictHostKeyChecking=yes"
-          git push git@github.com:hvngroup/hvn-ai-marketplace.git HEAD:refs/heads/main
+          git push git@github.com:HVN-GROUP/hvn-ai-marketplace.git HEAD:refs/heads/main

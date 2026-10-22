@@ -1,19 +1,29 @@
 name: deploy
 
-# Merge vào main → build image (tag = git SHA) → staging + smoke test → production (cần duyệt).
-# main chỉ nhận commit đã qua CI (branch protection + merge queue), nên deploy không chạy lại test.
+# Merge vào main → build image (tag = git SHA và `staging`) → Coolify deploy staging → smoke test.
+# Production chỉ chạy khi bấm tay Run workflow với production_sha: gói Team không có người duyệt bắt buộc
+# cho environment của repo riêng tư, nên nút bấm tay là bước duyệt. Rollback = chạy lại với SHA cũ.
+# main chỉ nhận commit đã qua CI (ruleset), nên deploy không chạy lại test.
 # Hai environment staging/production phải giới hạn "Deployment branches" = main (docs/thiet-lap-repo.md).
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      production_sha:
+        description: 'Mã commit (40 ký tự) đã chạy tốt trên staging để đưa lên production. Để trống: chỉ build và deploy staging.'
+        required: false
+        default: ''
 
 permissions:
   contents: read
 
+env:
+  IMAGE: ghcr.io/hvn-group/hvn-ai-mcp
+
 jobs:
   image:
-    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging' && github.ref == 'refs/heads/main'
+    if: github.repository == 'HVN-GROUP/hvn-ai-marketplace-staging' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.production_sha == '')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -22,13 +32,14 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Build và push ghcr.io/hvngroup/hvn-ai-mcp:${{ github.sha }}
+      - name: Build và push image theo SHA, gắn tag staging
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "$GH_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-          docker build -t ghcr.io/hvngroup/hvn-ai-mcp:${{ github.sha }} .
-          docker push ghcr.io/hvngroup/hvn-ai-mcp:${{ github.sha }}
+          docker build -t "$IMAGE:${{ github.sha }}" -t "$IMAGE:staging" .
+          docker push "$IMAGE:${{ github.sha }}"
+          docker push "$IMAGE:staging"
 
   staging:
     needs: image
@@ -39,21 +50,33 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Deploy staging
-        env: { DEPLOY_HOST: '${{ secrets.DEPLOY_HOST }}', DEPLOY_USER: '${{ secrets.DEPLOY_USER }}', DEPLOY_SSH_KEY: '${{ secrets.DEPLOY_SSH_KEY }}', DEPLOY_KNOWN_HOSTS: '${{ secrets.DEPLOY_KNOWN_HOSTS }}' }
-        run: sh deploy/remote-deploy.sh "${{ github.sha }}"
+      - name: Coolify deploy staging
+        env: { COOLIFY_URL: '${{ vars.COOLIFY_URL }}', COOLIFY_TOKEN: '${{ secrets.COOLIFY_TOKEN }}', COOLIFY_APP_UUID: '${{ vars.COOLIFY_APP_UUID }}' }
+        run: sh deploy/coolify-deploy.sh
       - run: sh deploy/smoke.sh "${{ vars.MCP_BASE_URL }}"
 
   production:
-    needs: staging
+    if: github.repository == 'HVN-GROUP/hvn-ai-marketplace-staging' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.production_sha != ''
     runs-on: ubuntu-latest
-    environment: production # bắt buộc người duyệt (cấu hình trong Settings > Environments)
+    environment: production
     concurrency: { group: deploy-production, cancel-in-progress: false }
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Deploy production
-        env: { DEPLOY_HOST: '${{ secrets.DEPLOY_HOST }}', DEPLOY_USER: '${{ secrets.DEPLOY_USER }}', DEPLOY_SSH_KEY: '${{ secrets.DEPLOY_SSH_KEY }}', DEPLOY_KNOWN_HOSTS: '${{ secrets.DEPLOY_KNOWN_HOSTS }}' }
-        run: sh deploy/remote-deploy.sh "${{ github.sha }}"
+      - name: Gắn tag production cho image của ${{ inputs.production_sha }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ inputs.production_sha }}
+        run: |
+          echo "$SHA" | grep -Eq '^[0-9a-f]{40}$' || { echo "::error::production_sha phải là mã commit đủ 40 ký tự"; exit 1; }
+          echo "$GH_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          # Chỉ commit trên main mới có image theo SHA, vì job image chỉ chạy trên main.
+          docker buildx imagetools create -t "$IMAGE:production" "$IMAGE:$SHA"
+      - name: Coolify deploy production
+        env: { COOLIFY_URL: '${{ vars.COOLIFY_URL }}', COOLIFY_TOKEN: '${{ secrets.COOLIFY_TOKEN }}', COOLIFY_APP_UUID: '${{ vars.COOLIFY_APP_UUID }}' }
+        run: sh deploy/coolify-deploy.sh
       - run: sh deploy/smoke.sh "${{ vars.MCP_BASE_URL }}"

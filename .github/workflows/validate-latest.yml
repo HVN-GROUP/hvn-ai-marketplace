@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   validate:
-    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging'
+    if: github.repository == 'HVN-GROUP/hvn-ai-marketplace-staging'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

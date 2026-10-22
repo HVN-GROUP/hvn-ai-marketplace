@@ -1,7 +1,7 @@
 name: github-traffic
 
 # Hằng tuần lưu số clone/view của repo công khai (GitHub chỉ giữ 14 ngày) làm chỉ số "lượt cài" đại diện.
-# Cần secret PUBLIC_REPO_TRAFFIC_TOKEN: fine-grained token, chỉ repo hvngroup/hvn-ai-marketplace,
+# Cần secret PUBLIC_REPO_TRAFFIC_TOKEN: fine-grained token, chỉ repo HVN-GROUP/hvn-ai-marketplace,
 # quyền "Administration: read" (API traffic yêu cầu quyền này).
 on:
   schedule:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   snapshot:
-    if: github.repository == 'hvngroup/hvn-ai-marketplace-staging'
+    if: github.repository == 'HVN-GROUP/hvn-ai-marketplace-staging'
     runs-on: ubuntu-latest
     steps:
       - name: Lấy số liệu traffic
@@ -23,7 +23,7 @@ jobs:
           test -n "$GH_TOKEN" || { echo "Chưa cấu hình PUBLIC_REPO_TRAFFIC_TOKEN"; exit 1; }
           echo "date,kind,count,uniques" > traffic.csv
           for kind in clones views; do
-            gh api "repos/hvngroup/hvn-ai-marketplace/traffic/$kind" \
+            gh api "repos/HVN-GROUP/hvn-ai-marketplace/traffic/$kind" \
               --jq ".$kind[] | [.timestamp[0:10], \"$kind\", .count, .uniques] | @csv" >> traffic.csv
           done
           cat traffic.csv

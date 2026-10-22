@@ -4,8 +4,8 @@ Plugin hướng dẫn tiếng Việt của HVN GROUP giúp doanh nghiệp dùng 
 
 ## Cài đặt
 
-- **claude.ai, Claude Desktop, Cowork:** Customize > Plugins > Add > Add marketplace, nhập `hvngroup/hvn-ai-marketplace`, rồi cài plugin cần dùng.
-- **Claude Code:** `/plugin marketplace add hvngroup/hvn-ai-marketplace`, rồi `/plugin install hvn-advisor@hvn-marketplace`. Bật tự cập nhật trong `/plugin` > Marketplaces để luôn có nội dung mới.
+- **claude.ai, Claude Desktop, Cowork:** Customize > Plugins > Add > Add marketplace, nhập `HVN-GROUP/hvn-ai-marketplace`, rồi cài plugin cần dùng.
+- **Claude Code:** `/plugin marketplace add HVN-GROUP/hvn-ai-marketplace`, rồi `/plugin install hvn-advisor@hvn-marketplace`. Bật tự cập nhật trong `/plugin` > Marketplaces để luôn có nội dung mới.
 
 Hướng dẫn chi tiết và cách nhận biết đúng marketplace của HVN: https://hvn.vn/ai-plugin
 

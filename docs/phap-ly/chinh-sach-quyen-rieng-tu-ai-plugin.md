@@ -7,7 +7,7 @@ Cập nhật lần cuối: [ngày đăng]
 ## 1. Phạm vi
 
 Chính sách áp dụng cho các plugin AI do CÔNG TY CỔ PHẦN TẬP ĐOÀN HVN (HVN GROUP) phát hành:
-- marketplace plugin trên Claude (`hvngroup/hvn-ai-marketplace`);
+- marketplace plugin trên Claude (`HVN-GROUP/hvn-ai-marketplace`);
 - plugin trên ChatGPT, cùng máy chủ nội dung `mcp.hvn.vn`.
 
 ## 2. Dữ liệu chúng tôi thu thập

@@ -8,7 +8,7 @@ import { renderRefs, rewriteLinksForPlugin, suggestionBlock, SUGGESTION_HEADING 
 import { CONTENT_TYPES } from '../shared/schema.ts';
 import { withUtm } from '../shared/utm.ts';
 
-export const PUBLIC_REPO = 'https://github.com/hvngroup/hvn-ai-marketplace';
+export const PUBLIC_REPO = 'https://github.com/HVN-GROUP/hvn-ai-marketplace';
 export const MARKETPLACE_NAME = 'hvn-marketplace';
 export const GENERATED_ROOTS = ['plugins', '.claude-plugin'];
 const ADVISOR = 'hvn-advisor';
@@ -173,8 +173,8 @@ function readme(plugin: Plugin, skills: { name: string; description: string }[])
     '',
     '## Cài đặt',
     '',
-    `- claude.ai, Claude Desktop, Cowork: Customize > Plugins > Add > Add marketplace, nhập \`hvngroup/hvn-ai-marketplace\`, rồi cài \`${plugin.id}\`.`,
-    `- Claude Code: \`/plugin marketplace add hvngroup/hvn-ai-marketplace\`, rồi \`/plugin install ${plugin.id}@${MARKETPLACE_NAME}\`. Bật tự cập nhật trong \`/plugin\` > Marketplaces.`,
+    `- claude.ai, Claude Desktop, Cowork: Customize > Plugins > Add > Add marketplace, nhập \`HVN-GROUP/hvn-ai-marketplace\`, rồi cài \`${plugin.id}\`.`,
+    `- Claude Code: \`/plugin marketplace add HVN-GROUP/hvn-ai-marketplace\`, rồi \`/plugin install ${plugin.id}@${MARKETPLACE_NAME}\`. Bật tự cập nhật trong \`/plugin\` > Marketplaces.`,
     '',
     'Hướng dẫn chi tiết: https://hvn.vn/ai-plugin',
     '',

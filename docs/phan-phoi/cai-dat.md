@@ -6,15 +6,15 @@ Plugin AI của HVN GROUP giúp doanh nghiệp dùng hiệu quả Claude, ChatGP
 
 ## Cách nhận biết đúng HVN GROUP
 
-- Tên marketplace chính thức duy nhất: **`hvngroup/hvn-ai-marketplace`**.
-- Tổ chức GitHub `hvngroup` có huy hiệu domain đã xác minh **hvn.vn**.
+- Tên marketplace chính thức duy nhất: **`HVN-GROUP/hvn-ai-marketplace`**.
+- Tổ chức GitHub `HVN-GROUP` có huy hiệu domain đã xác minh **hvn.vn**.
 - HVN GROUP **không bao giờ** gửi tên marketplace qua Zalo hay tin nhắn. Mọi hướng dẫn chỉ nằm trên trang này.
 - Nếu nghi ngờ, liên hệ kythuat@hvn.vn hoặc 024.9999.7777.
 
 ## Claude (claude.ai, Claude Desktop, Cowork)
 
 1. Mở **Customize** > **Plugins** > **Add** > **Add marketplace**.
-2. Nhập `hvngroup/hvn-ai-marketplace` [Sao chép].
+2. Nhập `HVN-GROUP/hvn-ai-marketplace` [Sao chép].
 3. Cài **HVN Advisor** và plugin ứng với dịch vụ bạn đang dùng, ví dụ **HVN · Claude cho doanh nghiệp**.
 4. Hỏi Claude: "Cho tôi lộ trình 90 ngày dùng Claude hiệu quả".
 
@@ -23,7 +23,7 @@ Gói Claude hỗ trợ: [điền sau khi chạy spike (a) — Free/Pro/Team/Ente
 ## Claude Code
 
 ```text
-/plugin marketplace add hvngroup/hvn-ai-marketplace
+/plugin marketplace add HVN-GROUP/hvn-ai-marketplace
 /plugin install hvn-advisor@hvn-marketplace
 ```
 

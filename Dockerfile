@@ -1,7 +1,7 @@
 # MCP server công khai: chỉ đọc nội dung đã duyệt, không có secret ứng dụng.
 FROM node:24-alpine
 # Liên kết image với repo để GITHUB_TOKEN của workflow deploy có quyền push lên GHCR.
-LABEL org.opencontainers.image.source=https://github.com/hvngroup/hvn-ai-marketplace-staging
+LABEL org.opencontainers.image.source=https://github.com/HVN-GROUP/hvn-ai-marketplace-staging
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package.json package-lock.json ./
