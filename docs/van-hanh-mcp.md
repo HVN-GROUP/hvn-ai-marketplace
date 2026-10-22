@@ -20,7 +20,7 @@ Hai ứng dụng loại Docker Image trên VPS Coolify dùng chung của HVN GRO
 **VPS:** đăng nhập GHCR một lần bằng token chỉ có quyền `read:packages` của tài khoản máy: `docker login ghcr.io`.
 
 **Cấu hình trong GitHub, cho từng environment `staging` và `production`:**
-- Secret `COOLIFY_TOKEN`: API token của Coolify, quyền hẹp nhất vẫn deploy được. Token không qua xác minh 2 bước, nên chỉ lưu ở đây và đổi mỗi 6 tháng.
+- Secret `COOLIFY_TOKEN`: API token của Coolify, chỉ cấp hai quyền `deploy` (gọi deploy) và `read` (đọc trạng thái deployment); không cấp `read:sensitive`, `write` hay `root`. Token không qua xác minh 2 bước, nên chỉ lưu ở đây và đổi mỗi 6 tháng.
 - Biến `COOLIFY_URL`, `COOLIFY_APP_UUID` (UUID của ứng dụng tương ứng), `MCP_BASE_URL` (ví dụ `https://staging-mcp.hvn.vn`).
 
 ## Deploy
