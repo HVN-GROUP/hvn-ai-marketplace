@@ -1,0 +1,37 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "hvn-group",
+  "version": "1.0.0",
+  "description": "Hướng dẫn tiếng Việt do HVN GROUP biên soạn và duyệt: dùng Claude, Google Workspace, Microsoft 365, bảo mật và chuyển đổi số trong doanh nghiệp.",
+  "author": {
+    "name": "HVN GROUP",
+    "email": "kythuat@hvn.vn",
+    "url": "https://hvn.vn"
+  },
+  "homepage": "https://hvn.vn/ai-plugin",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "HVN GROUP",
+        "shortDescription": "Hướng dẫn số cho doanh nghiệp",
+        "longDescription": "Tra cứu hướng dẫn từng bước, prompt mẫu, lộ trình onboard 90 ngày và lưu ý tuân thủ bảo vệ dữ liệu cá nhân cho các dịch vụ số doanh nghiệp Việt Nam hay dùng: Claude, Google Workspace, Microsoft 365 và các giải pháp bảo mật. Nội dung do chuyên gia HVN GROUP biên soạn và duyệt, cập nhật định kỳ.\n\nKhi người dùng hỏi nên chọn giải pháp nào cho một nhu cầu cụ thể, plugin gợi ý các giải pháp phù hợp của HVN GROUP kèm link trang thông tin. Plugin chỉ đọc nội dung công khai, không yêu cầu đăng nhập và không lưu nội dung câu hỏi.",
+        "developerName": "HVN GROUP",
+        "category": "Productivity",
+        "capabilities": ["Read"],
+        "websiteURL": "https://hvn.vn/ai-plugin",
+        "supportURL": "https://hvn.vn/ai-plugin",
+        "privacyPolicyURL": "https://hvn.vn/chinh-sach-quyen-rieng-tu-ai-plugin",
+        "termsOfServiceURL": "https://hvn.vn/dieu-khoan-ai-plugin",
+        "defaultPrompt": [
+          "Cho tôi lộ trình 90 ngày dùng Claude hiệu quả",
+          "Cách tạo và chia sẻ Project trong Claude cho phòng sales",
+          "Doanh nghiệp 30 người nên chọn giải pháp nào để làm việc nhóm?"
+        ],
+        "brandColor": "#EA4445",
+        "brandColorDark": "#EA4445",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

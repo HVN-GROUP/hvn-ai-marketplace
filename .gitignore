@@ -2,3 +2,4 @@ node_modules/
 dist/
 evals/results/*.csv
 !evals/results/.gitkeep
+release/

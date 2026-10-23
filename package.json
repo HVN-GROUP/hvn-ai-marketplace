@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "eval:sheet": "node scripts/eval.ts sheet",
     "eval:score": "node scripts/eval.ts score",
+    "package:chatgpt": "node scripts/package-chatgpt.ts",
     "start": "node server/main.ts"
   },
   "dependencies": {
