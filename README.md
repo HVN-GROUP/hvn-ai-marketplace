@@ -20,7 +20,7 @@ Các plugin `hvn-chatgpt`, `hvn-gemini`, `hvn-google-workspace`, `hvn-microsoft-
 
 ## Dành cho nhóm phát triển
 
-Nội dung nguồn nằm trong `content/`. Các thư mục `plugins/` và `.claude-plugin/` do `npm run build` sinh ra; không sửa tay.
+Nội dung nguồn nằm trong `content/`. Các thư mục `plugins/` và `.claude-plugin/` do `npm run build` sinh ra; không sửa tay. Build tự tăng số phiên bản (bản vá) của plugin nào có nội dung thay đổi so với bản build trước; marketplace tổ chức trên claude.ai dựa vào số phiên bản này để tự đồng bộ.
 
 ```bash
 npm ci

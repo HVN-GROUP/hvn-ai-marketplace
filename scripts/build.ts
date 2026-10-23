@@ -1,4 +1,5 @@
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stringify } from 'yaml';
@@ -202,7 +203,41 @@ function indexText(plugin: Plugin, skill: Skill, item: Item): string {
   });
 }
 
-export function generate(repo: Repo, licenseText: string): BuildOutput {
+// Số phiên bản plugin: giữ nguyên khi nội dung plugin không đổi so với bản build trước, tăng bản vá khi đổi.
+// Marketplace tổ chức trên claude.ai chỉ tự đồng bộ khi số phiên bản tăng.
+const FIRST_VERSION = '1.0.0';
+
+function pluginManifestPath(plugin: string): string {
+  return `plugins/${plugin}/.claude-plugin/plugin.json`;
+}
+
+// Dấu vân tay của một plugin: mọi file của plugin, riêng plugin.json bỏ trường version.
+export function pluginFingerprint(files: Map<string, string>, plugin: string): string | undefined {
+  const prefix = `plugins/${plugin}/`;
+  const paths = [...files.keys()].filter((p) => p.startsWith(prefix)).sort();
+  if (!paths.length) return undefined;
+  const hash = createHash('sha256');
+  for (const path of paths) {
+    let text = files.get(path) ?? '';
+    if (path === pluginManifestPath(plugin)) {
+      const { version: _version, ...rest } = JSON.parse(text) as Record<string, unknown>;
+      text = JSON.stringify(rest);
+    }
+    hash.update(`${path}\0${text}\0`);
+  }
+  return hash.digest('hex');
+}
+
+export function nextVersion(previous: Map<string, string>, current: Map<string, string>, plugin: string): string {
+  const before = previous.get(pluginManifestPath(plugin));
+  const version = before ? (JSON.parse(before) as { version?: unknown }).version : undefined;
+  if (typeof version !== 'string' || !/^\d+\.\d+\.\d+$/.test(version)) return FIRST_VERSION;
+  if (pluginFingerprint(previous, plugin) === pluginFingerprint(current, plugin)) return version;
+  const [major, minor, patch] = version.split('.').map(Number);
+  return `${major}.${minor}.${patch + 1}`;
+}
+
+export function generate(repo: Repo, licenseText: string, previous: Map<string, string> = new Map()): BuildOutput {
   const files = new Map<string, string>();
   const index: IndexRecord[] = [];
   const listed: { name: string; description: string }[] = [];
@@ -234,24 +269,22 @@ export function generate(repo: Repo, licenseText: string): BuildOutput {
       }
     }
 
-    files.set(
-      `plugins/${plugin.id}/.claude-plugin/plugin.json`,
-      `${JSON.stringify(
-        {
-          name: plugin.id,
-          displayName: plugin.meta.displayName,
-          description: plugin.meta.description,
-          author: { name: 'HVN GROUP', email: 'hi@hvn.vn', url: 'https://hvn.vn' },
-          homepage: 'https://hvn.vn/ai-plugin',
-          license: LICENSE_ID,
-          keywords: plugin.meta.keywords ?? [],
-        },
-        null,
-        2,
-      )}\n`,
-    );
+    const manifest = {
+      name: plugin.id,
+      version: FIRST_VERSION,
+      displayName: plugin.meta.displayName,
+      description: plugin.meta.description,
+      author: { name: 'HVN GROUP', email: 'hi@hvn.vn', url: 'https://hvn.vn' },
+      homepage: 'https://hvn.vn/ai-plugin',
+      license: LICENSE_ID,
+      keywords: plugin.meta.keywords ?? [],
+    };
+    const manifestJson = () => `${JSON.stringify(manifest, null, 2)}\n`;
     files.set(`plugins/${plugin.id}/README.md`, readme(plugin, skillSummaries));
     files.set(`plugins/${plugin.id}/LICENSE`, licenseText);
+    files.set(pluginManifestPath(plugin.id), manifestJson());
+    manifest.version = nextVersion(previous, files, plugin.id);
+    files.set(pluginManifestPath(plugin.id), manifestJson());
     listed.push({ name: plugin.id, description: plugin.meta.description });
   }
 
@@ -272,9 +305,22 @@ export function generate(repo: Repo, licenseText: string): BuildOutput {
   return { files, index };
 }
 
+// Các file sinh tự động đang có trên đĩa, dùng làm mốc để quyết định có tăng số phiên bản hay không.
+export function readGenerated(root: string): Map<string, string> {
+  const files = new Map<string, string>();
+  for (const dir of GENERATED_ROOTS) {
+    if (!existsSync(join(root, dir))) continue;
+    for (const rel of readdirSync(join(root, dir), { recursive: true }) as string[]) {
+      const path = `${dir}/${rel.split('\\').join('/')}`;
+      if (statSync(join(root, path)).isFile()) files.set(path, readFileSync(join(root, path), 'utf8'));
+    }
+  }
+  return files;
+}
+
 export function buildFromDisk(root: string): BuildOutput {
   const repo = loadRepoOrThrow(root);
-  return generate(repo, readFileSync(join(root, 'LICENSE-CONTENT.md'), 'utf8'));
+  return generate(repo, readFileSync(join(root, 'LICENSE-CONTENT.md'), 'utf8'), readGenerated(root));
 }
 
 function main(): void {

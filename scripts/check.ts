@@ -6,7 +6,7 @@ import { entryById, hvnHosts } from '../shared/catalog.ts';
 import { loadRepo, type Repo } from '../shared/load.ts';
 import { internalLinks, refIds } from '../shared/render.ts';
 import { CONTENT_TYPES, SLUG as SLUG_RE } from '../shared/schema.ts';
-import { GENERATED_ROOTS, generate } from './build.ts';
+import { GENERATED_ROOTS, generate, readGenerated } from './build.ts';
 
 export type Finding = { file: string; rule: string; message: string };
 
@@ -270,7 +270,7 @@ export function runChecks(root: string, opts: { today: Date }): { errors: Findin
   const errors = checkRepo(repo);
   // Không sinh plugin khi nội dung còn lỗi tham chiếu; build sẽ ném lỗi ngay.
   if (!errors.length) {
-    const { files } = generate(repo, readFileSync(join(root, 'LICENSE-CONTENT.md'), 'utf8'));
+    const { files } = generate(repo, readFileSync(join(root, 'LICENSE-CONTENT.md'), 'utf8'), readGenerated(root));
     errors.push(...checkGenerated(root, files), ...checkUtm(files, repo));
   }
   return { errors, warnings: checkFreshness(repo, opts.today), repo };

@@ -214,3 +214,41 @@ describe('runChecks', () => {
     expect(warnings.map((w) => w.rule)).toEqual(['freshness']);
   });
 });
+
+describe('số phiên bản plugin', () => {
+  // Build lại mà giữ bản build trước trên đĩa làm mốc, như khi biên tập viên chạy npm run build.
+  function buildInPlace(dir: string): void {
+    const { files } = buildFromDisk(dir);
+    rmSync(join(dir, 'plugins'), { recursive: true, force: true });
+    rmSync(join(dir, '.claude-plugin'), { recursive: true, force: true });
+    for (const [path, text] of files) write(dir, path, text);
+  }
+  const version = (dir: string) =>
+    (JSON.parse(readFileSync(join(dir, 'plugins/hvn-test/.claude-plugin/plugin.json'), 'utf8')) as { version: string }).version;
+  const itemPath = 'content/hvn-test/skill-thu/muc-thu.md';
+
+  it('plugin mới bắt đầu từ 1.0.0 và giữ nguyên khi build lại không đổi nội dung', () => {
+    const dir = fixture();
+    expect(version(dir)).toBe('1.0.0');
+    buildInPlace(dir);
+    expect(version(dir)).toBe('1.0.0');
+  });
+
+  it('tăng bản vá đúng một lần khi nội dung plugin đổi', () => {
+    const dir = fixture();
+    const item = readFileSync(join(dir, itemPath), 'utf8');
+    write(dir, itemPath, item.replace('Nội dung hướng dẫn.', 'Nội dung hướng dẫn đã sửa.'));
+    buildInPlace(dir);
+    expect(version(dir)).toBe('1.0.1');
+    buildInPlace(dir);
+    expect(version(dir)).toBe('1.0.1');
+  });
+
+  it('báo drift khi sửa nội dung mà chưa build lại', () => {
+    const dir = fixture();
+    const item = readFileSync(join(dir, itemPath), 'utf8');
+    write(dir, itemPath, item.replace('Nội dung hướng dẫn.', 'Nội dung khác.'));
+    const drift = runChecks(dir, { today: TODAY }).errors.filter((e) => e.rule === 'drift').map((e) => e.file);
+    expect(drift).toContain('plugins/hvn-test/.claude-plugin/plugin.json');
+  });
+});
