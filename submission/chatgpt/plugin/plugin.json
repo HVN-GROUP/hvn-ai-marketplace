@@ -15,7 +15,7 @@
         "displayName": "HVN GROUP",
         "shortDescription": "Hướng dẫn số cho doanh nghiệp",
         "longDescription": "Tra cứu hướng dẫn từng bước, prompt mẫu, lộ trình onboard 90 ngày và lưu ý tuân thủ bảo vệ dữ liệu cá nhân cho các dịch vụ số doanh nghiệp Việt Nam hay dùng: Claude, Google Workspace, Microsoft 365 và các giải pháp bảo mật. Nội dung do chuyên gia HVN GROUP biên soạn và duyệt, cập nhật định kỳ.\n\nKhi người dùng hỏi nên chọn giải pháp nào cho một nhu cầu cụ thể, plugin gợi ý các giải pháp phù hợp của HVN GROUP kèm link trang thông tin. Plugin chỉ đọc nội dung công khai, không yêu cầu đăng nhập và không lưu nội dung câu hỏi.",
-        "developerName": "HVN GROUP",
+        "developerName": "HVN GROUP JOINT STOCK COMPANY",
         "category": "Productivity",
         "capabilities": ["Read"],
         "websiteURL": "https://hvn.vn/ai-plugin",

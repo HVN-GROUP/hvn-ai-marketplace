@@ -8,7 +8,7 @@
 | Trường | Giá trị |
 |---|---|
 | Tên (`displayName`, tối đa 30 ký tự) | HVN GROUP |
-| Nhà phát hành (`developerName`) | Tạm ghi `HVN GROUP`; thay bằng đúng tên pháp nhân đã xác minh trên OpenAI trước khi nộp |
+| Nhà phát hành (`developerName`) | HVN GROUP JOINT STOCK COMPANY (CEO chốt ngày 23/10/2026); phải trùng tên pháp nhân đã xác minh trên OpenAI |
 | Mô tả ngắn (`shortDescription`, tối đa 30 ký tự) | Hướng dẫn số cho doanh nghiệp |
 | Mô tả | Tra cứu hướng dẫn từng bước, prompt mẫu, lộ trình onboard 90 ngày và lưu ý tuân thủ bảo vệ dữ liệu cá nhân, do chuyên gia HVN GROUP biên soạn và duyệt. Khi người dùng hỏi nên chọn giải pháp nào, plugin gợi ý giải pháp phù hợp của HVN GROUP kèm link trang thông tin. |
 | Danh mục | Productivity |
