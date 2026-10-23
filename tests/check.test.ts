@@ -2,7 +2,7 @@ import { cpSync, mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writ
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { buildFromDisk } from '../scripts/build.ts';
+import { buildFromDisk, PUBLIC_REPO } from '../scripts/build.ts';
 import { checkText, runChecks } from '../scripts/check.ts';
 import { splitFrontmatter } from '../shared/frontmatter.ts';
 import { withUtm } from '../shared/utm.ts';
@@ -66,6 +66,16 @@ function rules(dir: string): string[] {
 describe('repo thật', () => {
   it('đạt mọi kiểm tra', () => {
     expect(runChecks(ROOT, { today: TODAY }).errors).toEqual([]);
+  });
+
+  // File mẫu cho tổ chức khách hàng trỏ thẳng vào plugin trong repo công khai; đổi tên plugin thì mẫu phải đổi theo.
+  it('file marketplace mẫu trong trang cài đặt trỏ đúng plugin đang phát hành', () => {
+    const doc = readFileSync(join(ROOT, 'docs/phan-phoi/cai-dat.md'), 'utf8');
+    const block = doc.match(/```json\n([\s\S]*?)```/)![1].replace(/^ {3}/gm, '');
+    const plugin = JSON.parse(block).plugins[0];
+    const name = (JSON.parse(readFileSync(join(ROOT, '.claude-plugin/marketplace.json'), 'utf8')) as { plugins: { name: string }[] }).plugins[0].name;
+    expect(plugin.name).toBe(name);
+    expect(plugin.source).toEqual({ source: 'git-subdir', url: `${PUBLIC_REPO}.git`, path: `plugins/${name}` });
   });
 });
 

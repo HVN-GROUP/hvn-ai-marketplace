@@ -9,7 +9,13 @@ Plugin do HVN GROUP (https://hvn.vn) biên soạn bằng tiếng Việt. Mọi n
 - claude.ai, Claude Desktop, Cowork: Customize > Plugins > Add > Add marketplace, nhập `HVN-GROUP/hvn-ai-marketplace`, rồi cài `tech-advisor`.
 - Claude Code: `/plugin marketplace add HVN-GROUP/hvn-ai-marketplace`, rồi `/plugin install tech-advisor@hvn-marketplace`. Bật tự cập nhật trong `/plugin` > Marketplaces.
 
-Hướng dẫn chi tiết: https://hvn.vn/ai-plugin
+Doanh nghiệp dùng Claude Team hoặc Enterprise muốn cài sẵn cho cả tổ chức: xem hướng dẫn tại https://hvn.vn/ai-plugin.
+
+## Plugin làm gì và không làm gì
+
+- Plugin chỉ gồm skill và tài liệu hướng dẫn dạng văn bản. Plugin không có hook, không có máy chủ MCP, không chạy mã và không gửi dữ liệu trò chuyện đi đâu.
+- Khi phù hợp với câu hỏi, câu trả lời có thể giới thiệu sản phẩm và giải pháp do HVN GROUP cung cấp, kèm link tới website của HVN GROUP. HVN GROUP là đối tác phân phối và triển khai của Google, Microsoft, Anthropic, Zoho và nhiều hãng phần mềm khác; plugin nói rõ điều này khi giới thiệu.
+- Link tới website HVN GROUP có tham số UTM (utm_source=claude, utm_medium=ai-plugin) để đo lượt truy cập đến từ plugin. Chính sách quyền riêng tư: https://hvn.vn/chinh-sach-quyen-rieng-tu-ai-plugin
 
 ## Chủ đề
 

@@ -31,9 +31,57 @@ Bật **tự cập nhật** trong `/plugin` > Marketplaces. Tự cập nhật m�
 
 ## Dành cho quản trị viên Claude Team và Enterprise
 
-- Nếu thành viên không thấy mục **Add marketplace**: Owner bật chính sách **User-created skills** trong cài đặt tổ chức.
-- Muốn cài sẵn cho cả tổ chức: tạo bản sao (mirror) của repo vào một repo **riêng tư** của công ty rồi dùng **Sync from GitHub**, hoặc tải gói zip lên. Đồng bộ tổ chức chỉ nhận repo riêng tư.
-- Cần hỗ trợ: Service HVN GROUP, kythuat@hvn.vn.
+Chủ tổ chức (Owner) có thể cài Tech Advisor cho mọi thành viên mà không cần sao chép nội dung. Chọn một trong các cách sau.
+
+### Cách 1: từ thư mục plugin của Anthropic (khi Tech Advisor đã được niêm yết)
+
+Không cần GitHub. Plugin tự cập nhật khi HVN GROUP phát hành bản mới.
+
+1. Mở **Organization settings** > **Plugins & skills** > tab **Inventory**.
+2. Tìm **Tech Advisor**, mở menu cuối dòng > **Default access** > chọn **Installed by default**.
+
+[Hiển thị sau khi Anthropic duyệt: link trang Tech Advisor trong thư mục plugin.]
+
+### Cách 2: đồng bộ từ một repo GitHub chỉ chứa một file
+
+Cách này cần **một tài khoản GitHub** của doanh nghiệp (gói miễn phí là đủ) để tạo một repo **riêng tư**. Repo chỉ chứa một file trỏ tới plugin của HVN GROUP, không chứa bản sao nội dung. Lý do: Claude chỉ đồng bộ marketplace của tổ chức từ repo riêng tư, còn plugin bên trong được phép trỏ tới repo công khai của HVN GROUP.
+
+1. Trên GitHub, tạo repo **Private**, ví dụ `cong-ty-mau/claude-plugins`.
+2. Thêm file `.claude-plugin/marketplace.json` với nội dung:
+
+   ```json
+   {
+     "name": "hvn-tech-advisor",
+     "owner": { "name": "Tên công ty của bạn" },
+     "plugins": [
+       {
+         "name": "tech-advisor",
+         "description": "Cố vấn công nghệ tiếng Việt do HVN GROUP phát hành",
+         "source": {
+           "source": "git-subdir",
+           "url": "https://github.com/HVN-GROUP/hvn-ai-marketplace.git",
+           "path": "plugins/tech-advisor"
+         }
+       }
+     ]
+   }
+   ```
+
+3. Trên claude.ai, mở **Organization settings** > **Plugins & skills** > **Add** > **Sync from GitHub**. Kết nối GitHub, cài **Claude GitHub App** cho repo vừa tạo, chọn repo rồi bấm **Create**.
+4. Ở tab **Inventory**, đặt **Tech Advisor** là **Installed by default**.
+5. **Cập nhật:** Claude không tự đồng bộ theo lịch. Khi HVN GROUP thông báo có bản mới, mở tab **Marketplaces** > menu của marketplace > **Re-sync**.
+
+Thành viên không cần tài khoản GitHub; chỉ người thiết lập cần.
+
+### Cách 3: từng thành viên tự thêm
+
+Owner bật **User-created skills** trong **Organization settings** > **Plugins & skills** > **Policy**. Mỗi thành viên làm theo phần **Claude** ở trên.
+
+### Claude Code cho đội kỹ thuật
+
+Quản trị viên khai báo marketplace `HVN-GROUP/hvn-ai-marketplace` trong managed settings (`extraKnownMarketplaces`, `enabledPlugins` với `tech-advisor@hvn-marketplace`) và bật tự cập nhật. Claude Code trên máy nhân viên tự nhận bản mới.
+
+Cần hỗ trợ: Service HVN GROUP, kythuat@hvn.vn.
 
 ## ChatGPT
 
