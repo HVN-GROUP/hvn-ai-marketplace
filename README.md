@@ -13,7 +13,7 @@ Hướng dẫn chi tiết và cách nhận biết đúng marketplace của HVN: 
 
 | Chủ đề | Nội dung |
 |---|---|
-| Tư vấn chuyển đổi số (`hvn-advisor`) | Tư vấn theo nhu cầu, chọn gói theo quy mô, danh mục 14 thương hiệu và 22 giải pháp trọn gói |
+| Tư vấn chuyển đổi số (`hvn-advisor`) | Tư vấn theo nhu cầu, chọn gói theo quy mô, chọn kênh mua (trực tiếp hay qua đối tác), danh mục 14 thương hiệu và 22 giải pháp trọn gói |
 | Claude cho doanh nghiệp (`hvn-claude`) | Lộ trình 90 ngày, prompt tiếng Việt, Projects, quản trị Team, tuân thủ dữ liệu cá nhân |
 
 Các chủ đề ChatGPT, Gemini, Google Workspace, Microsoft 365 và bảo mật được thêm vào cùng plugin khi đủ nội dung đã duyệt.

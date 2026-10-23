@@ -177,6 +177,14 @@ describe('runChecks', () => {
     expect(files.get('plugins/tech-advisor/skills/skill-khac/references/muc-khac.md')).toContain('utm_campaign=hvn-khac');
   });
 
+  it('chỉ thêm quy tắc câu hỏi mua hàng khi có skill mua-dich-vu-so', () => {
+    const dir = fixture();
+    const skillFile = 'plugins/tech-advisor/skills/skill-thu/SKILL.md';
+    expect(buildFromDisk(dir).files.get(skillFile)).not.toContain('mua-dich-vu-so');
+    write(dir, 'content/hvn-test/mua-dich-vu-so/SKILL.md', '---\nname: mua-dich-vu-so\ndescription: "Mua hàng"\n---\n# Mua hàng\n');
+    expect(buildFromDisk(dir).files.get(skillFile)).toContain('dùng skill "mua-dich-vu-so"');
+  });
+
   it('báo tên skill trùng giữa các chủ đề và trùng skill danh mục', () => {
     const dir = fixture();
     write(dir, 'content/hvn-khac/topic.yaml', 'displayName: "Khác"\ndescription: "Chủ đề thứ hai"\n');

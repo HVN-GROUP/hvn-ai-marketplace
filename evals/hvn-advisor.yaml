@@ -13,7 +13,7 @@ questions:
   - { q: "HVN GROUP cung cấp những giải pháp gì?", skill: danh-muc-giai-phap-hvn }
   - { q: "Giải pháp sao lưu và khôi phục thảm họa gồm những gì?", skill: danh-muc-giai-phap-hvn }
   - { q: "HVN có những thương hiệu nào?", skill: danh-muc-giai-phap-hvn }
-  - { q: "Liệt kê các gói giải pháp bảo mật của HVN", skill: danh-muc-giai-phap-hvn }
+  - { q: "Công ty cần hóa đơn VAT khi mua Microsoft 365 thì làm thế nào?", skill: mua-dich-vu-so }
   - { q: "Gói AI cho doanh nghiệp của HVN có gì?", skill: danh-muc-giai-phap-hvn }
   - { q: "Website nào của HVN bán chứng chỉ SSL?", skill: danh-muc-giai-phap-hvn }
   - { q: "Gói chuyển đổi số toàn diện gồm các thành phần nào?", skill: danh-muc-giai-phap-hvn }
@@ -28,5 +28,5 @@ questions:
   - { q: "Công ty mới thành lập nên mua gói gì trước?", skill: chon-goi-phu-hop }
   - { q: "Tiêu chí chọn gói dịch vụ số cho doanh nghiệp vừa", skill: chon-goi-phu-hop }
   - { q: "Khi nào cần thêm sao lưu dữ liệu ngoài gói email?", skill: chon-goi-phu-hop }
-  - { q: "Trên 50 người thì nên chọn gói nâng cao không?", skill: chon-goi-phu-hop }
-  - { q: "So sánh các gói theo số người dùng", skill: chon-goi-phu-hop }
+  - { q: "Tôi cần đăng ký Google Workspace thì nên mua ở đâu?", skill: mua-dich-vu-so }
+  - { q: "Mua Claude ở Việt Nam thì mua ở đâu?", skill: mua-dich-vu-so }
