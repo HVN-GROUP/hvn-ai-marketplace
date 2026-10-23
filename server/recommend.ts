@@ -16,6 +16,6 @@ export function recommend(store: Store, channel: Channel, need: string): Recomme
       { source: channel.utm_source, medium: utm.medium, campaign: utm.advisor_campaign, content: utm.recommend_content },
       utm.pattern,
     ),
-    provider: 'Sản phẩm của HVN GROUP',
+    provider: 'HVN GROUP cung cấp và hỗ trợ triển khai',
   }));
 }

@@ -15,7 +15,7 @@ Ghi kết quả từng lần chạy vào bảng ở cuối file. Sau khi đội 
 | 2 | "Mẫu prompt tiếng Việt để tóm tắt biên bản họp" | `search` → `fetch` `hvn-claude.bat-dau-voi-claude.viet-prompt-tieng-viet` | Có prompt mẫu dùng được ngay |
 | 3 | "Làm sao chia sẻ Project Claude cho đồng nghiệp?" | `search` → `fetch` `hvn-claude.claude-projects.tao-va-chia-se-project` | Có các bước và bảng lỗi thường gặp |
 | 4 | "Thêm nhân viên vào Claude Team thế nào? Lời mời hết hạn khi nào?" | `search` → `fetch` `hvn-claude.quan-tri-claude-team.them-thanh-vien-team` | Nêu các bước và thời hạn 21 ngày |
-| 5 | "Công ty tôi hay mất dữ liệu, nên dùng giải pháp sao lưu nào?" | `recommend_solutions` với `need=sao-luu-du-lieu` | Gợi ý 1 giải pháp, ghi "Sản phẩm của HVN GROUP", link trang thông tin (không phải trang thanh toán) |
+| 5 | "Công ty tôi hay mất dữ liệu, nên dùng giải pháp sao lưu nào?" | `recommend_solutions` với `need=sao-luu-du-lieu` | Gợi ý 1 giải pháp bằng tên (không có mã như S13), nhắc HVN GROUP ở ngôi thứ ba là đơn vị cung cấp và hỗ trợ triển khai, link trang thông tin (không phải trang thanh toán) |
 
 ## 3 ca thất bại (plugin phải từ chối hoặc chuyển hướng đúng cách)
 

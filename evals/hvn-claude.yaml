@@ -1,6 +1,6 @@
 # 30 câu hỏi thực tế; `skill` là skill kỳ vọng được Claude chọn.
-# Chạy với cả 7 plugin đã cài. Ngưỡng: chọn đúng skill ≥ 80%, có khối gợi ý ≥ 90%.
-plugin: hvn-claude
+# Chạy với plugin tech-advisor đã cài (mọi chủ đề). Ngưỡng: chọn đúng skill ≥ 80%, có câu giới thiệu ≥ 90%.
+topic: hvn-claude
 questions:
   - { q: "Công ty tôi mới mua Claude Team, tuần đầu nên làm gì?", skill: bat-dau-voi-claude }
   - { q: "Có lộ trình nào để cả công ty dùng Claude bài bản trong 3 tháng không?", skill: bat-dau-voi-claude }

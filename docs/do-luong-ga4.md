@@ -14,8 +14,8 @@ Nguồn duy nhất của quy ước là `config/channels.yaml`.
 
 | Nguồn | utm_source | utm_medium | utm_campaign | utm_content |
 |---|---|---|---|---|
-| Plugin Claude | `claude` | `ai-plugin` | tên plugin | `plugin.skill.item` |
-| ChatGPT, công cụ `fetch` | `chatgpt` | `ai-plugin` | tên plugin của tài liệu | mã tài liệu |
+| Plugin Claude (Tech Advisor) | `claude` | `ai-plugin` | mã chủ đề, ví dụ `hvn-claude` | `chủ-đề.skill.item` |
+| ChatGPT, công cụ `fetch` | `chatgpt` | `ai-plugin` | mã chủ đề của tài liệu | mã tài liệu |
 | ChatGPT, công cụ `recommend_solutions` | `chatgpt` | `ai-plugin` | `hvn-advisor` | `recommend` |
 | Email WHMCS | `email` | `whmcs` | `ai-plugin-onboarding` | nhóm sản phẩm |
 | Zalo OA | `zalo` | `zalo-oa` | `ai-plugin-onboarding` | nhóm sản phẩm |
@@ -33,9 +33,9 @@ Nguồn duy nhất của quy ước là `config/channels.yaml`.
 |---|---|---|
 | Lượt cài (đại diện) | GA4 `copy_install_command`; artifact `github-traffic` hằng tuần | Số người dùng duy nhất bấm nút cài; số clone duy nhất theo tuần |
 | CTR ChatGPT | Log MCP (dòng `tool=recommend_solutions` có `items>0`), kết hợp GA4 với `utm_source=chatgpt` và `utm_campaign=hvn-advisor` | Số phiên ÷ số lần gọi có ít nhất 1 mục |
-| Click Claude | GA4 `utm_source=claude` | Tổng phiên theo plugin và nội dung. Không tính CTR vì Claude không gửi số lần hiển thị về HVN GROUP. |
-| Chuyển đổi trên website | GA4 key events trong các phiên `utm_medium=ai-plugin` | Số key event và tỷ lệ chuyển đổi theo plugin |
-| Lượt mở lộ trình onboard | GA4 phiên có `utm_content` là item `lo-trinh`; log MCP `fetch` cho item `lo-trinh` | Số phiên và số lần fetch theo plugin |
+| Click Claude | GA4 `utm_source=claude` | Tổng phiên theo chủ đề và nội dung. Không tính CTR vì Claude không gửi số lần hiển thị về HVN GROUP. |
+| Chuyển đổi trên website | GA4 key events trong các phiên `utm_medium=ai-plugin` | Số key event và tỷ lệ chuyển đổi theo chủ đề |
+| Lượt mở lộ trình onboard | GA4 phiên có `utm_content` là item `lo-trinh`; log MCP `fetch` cho item `lo-trinh` | Số phiên và số lần fetch theo chủ đề |
 
 ## Giới hạn
 

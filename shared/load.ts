@@ -8,25 +8,28 @@ import {
   catalogSchema,
   channelsSchema,
   itemMetaSchema,
-  pluginMetaSchema,
+  pluginConfigSchema,
   skillMetaSchema,
+  topicMetaSchema,
   type Allowlist,
   type Catalog,
   type ChannelsConfig,
   type ItemMeta,
-  type PluginMeta,
+  type PluginConfig,
   type SkillMeta,
+  type TopicMeta,
 } from './schema.ts';
 
 export type Item = { id: string; file: string; meta: ItemMeta; body: string };
 export type Skill = { id: string; file: string; meta: SkillMeta; intro: string; items: Item[] };
-export type Plugin = { id: string; meta: PluginMeta; skills: Skill[] };
+export type Topic = { id: string; meta: TopicMeta; skills: Skill[] };
 export type Repo = {
   root: string;
   catalog: Catalog;
   channels: ChannelsConfig;
   allowlist: Allowlist;
-  plugins: Plugin[];
+  plugin: PluginConfig;
+  topics: Topic[];
 };
 
 // Lỗi được gom lại thay vì ném ngay, để check.ts báo tất cả trong một lần chạy.
@@ -79,18 +82,19 @@ export function loadRepo(root: string): LoadResult {
   const catalog = readYaml(root, 'catalog/products.yaml', catalogSchema, errors);
   const channels = readYaml(root, 'config/channels.yaml', channelsSchema, errors);
   const allowlist = readYaml(root, 'config/link-allowlist.yaml', allowlistSchema, errors);
+  const plugin = readYaml(root, 'config/plugin.yaml', pluginConfigSchema, errors);
 
-  const plugins: Plugin[] = [];
-  for (const pluginId of dirs(join(root, 'content'))) {
-    const pluginRel = `content/${pluginId}`;
-    if (!existsSync(join(root, pluginRel, 'plugin.yaml'))) {
-      errors.push(`${pluginRel}: thiếu plugin.yaml`);
+  const topics: Topic[] = [];
+  for (const topicId of dirs(join(root, 'content'))) {
+    const topicRel = `content/${topicId}`;
+    if (!existsSync(join(root, topicRel, 'topic.yaml'))) {
+      errors.push(`${topicRel}: thiếu topic.yaml`);
       continue;
     }
-    const meta = readYaml(root, `${pluginRel}/plugin.yaml`, pluginMetaSchema, errors);
+    const meta = readYaml(root, `${topicRel}/topic.yaml`, topicMetaSchema, errors);
     const skills: Skill[] = [];
-    for (const skillId of dirs(join(root, pluginRel))) {
-      const skillRel = `${pluginRel}/${skillId}`;
+    for (const skillId of dirs(join(root, topicRel))) {
+      const skillRel = `${topicRel}/${skillId}`;
       const skillFile = `${skillRel}/SKILL.md`;
       if (!existsSync(join(root, skillFile))) {
         errors.push(`${skillRel}: thiếu SKILL.md`);
@@ -106,11 +110,11 @@ export function loadRepo(root: string): LoadResult {
       }
       if (skill) skills.push({ id: skillId, file: skillFile, meta: skill.meta, intro: skill.body, items });
     }
-    if (meta) plugins.push({ id: pluginId, meta, skills });
+    if (meta) topics.push({ id: topicId, meta, skills });
   }
 
   // Khi cấu hình gốc hỏng, `errors` khác rỗng và mọi nơi gọi đều dừng trước khi dùng repo.
-  return { repo: { root, catalog: catalog!, channels: channels!, allowlist: allowlist!, plugins }, errors };
+  return { repo: { root, catalog: catalog!, channels: channels!, allowlist: allowlist!, plugin: plugin!, topics }, errors };
 }
 
 // Server MCP chỉ cần catalog và cấu hình kênh, không cần nội dung nguồn.

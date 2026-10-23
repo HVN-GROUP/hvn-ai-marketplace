@@ -63,12 +63,21 @@ export const allowlistSchema = z.strictObject({
 });
 export type Allowlist = z.infer<typeof allowlistSchema>;
 
-export const pluginMetaSchema = z.strictObject({
+// Plugin duy nhất phát hành trên Claude; mọi chủ đề trong content/ được gộp vào đây.
+export const pluginConfigSchema = z.strictObject({
+  name: z.string().max(64).regex(SLUG),
   displayName: z.string().min(1),
   description: z.string().min(1).max(1024),
-  keywords: z.array(z.string()).optional(),
+  keywords: z.array(z.string()),
 });
-export type PluginMeta = z.infer<typeof pluginMetaSchema>;
+export type PluginConfig = z.infer<typeof pluginConfigSchema>;
+
+// Một chủ đề = một thư mục content/<chủ-đề>/ (ví dụ hvn-claude). Mã chủ đề là utm_campaign và tiền tố mã tài liệu.
+export const topicMetaSchema = z.strictObject({
+  displayName: z.string().min(1),
+  description: z.string().min(1).max(1024),
+});
+export type TopicMeta = z.infer<typeof topicMetaSchema>;
 
 // Bộ trường hợp lệ trên claude.ai và chuẩn Agent Skills.
 export const skillMetaSchema = z.strictObject({

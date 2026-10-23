@@ -1,0 +1,7 @@
+# Plugin duy nhất phát hành trên Claude. Mỗi thư mục content/<chủ-đề>/ là một chủ đề của plugin này.
+# Thêm sản phẩm hoặc đối tác mới: thêm dòng vào catalog/products.yaml, hoặc thêm một chủ đề khi cần hướng dẫn chuyên sâu.
+# Không tạo plugin mới.
+name: tech-advisor
+displayName: "Tech Advisor"
+description: "Cố vấn công nghệ tiếng Việt cho doanh nghiệp: chọn giải pháp chuyển đổi số, dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và bảo vệ dữ liệu."
+keywords: [tu-van, chuyen-doi-so, claude, chatgpt, gemini, google-workspace, microsoft-365, bao-mat, tieng-viet]

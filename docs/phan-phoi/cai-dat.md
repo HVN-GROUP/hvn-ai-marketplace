@@ -2,7 +2,7 @@
 
 > Nguồn nội dung cho trang `hvn.vn/ai-plugin`. Marketing đăng sau khi CMO duyệt. Nút "Sao chép lệnh cài" gắn sự kiện GA4 `copy_install_command`.
 
-Plugin AI của HVN GROUP giúp doanh nghiệp dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và các giải pháp bảo mật. Mỗi plugin có **lộ trình onboard 90 ngày**, hướng dẫn từng bước bằng tiếng Việt, và gợi ý giải pháp liên quan từ HVN GROUP.
+**Tech Advisor** là plugin cố vấn công nghệ tiếng Việt do HVN GROUP phát hành. Chỉ cần cài một plugin để được tư vấn chọn giải pháp và hướng dẫn dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và các giải pháp bảo mật. Mỗi chủ đề có **lộ trình onboard 90 ngày** và hướng dẫn từng bước bằng tiếng Việt.
 
 ## Cách nhận biết đúng HVN GROUP
 
@@ -15,7 +15,7 @@ Plugin AI của HVN GROUP giúp doanh nghiệp dùng hiệu quả Claude, ChatGP
 
 1. Mở **Customize** > **Plugins** > **Add** > **Add marketplace**.
 2. Nhập `HVN-GROUP/hvn-ai-marketplace` [Sao chép].
-3. Cài **HVN Advisor** và plugin ứng với dịch vụ bạn đang dùng, ví dụ **HVN · Claude cho doanh nghiệp**.
+3. Cài **Tech Advisor** (nhà phát hành: HVN GROUP).
 4. Hỏi Claude: "Cho tôi lộ trình 90 ngày dùng Claude hiệu quả".
 
 Gói Claude hỗ trợ: [điền sau khi chạy spike (a) — Free/Pro/Team/Enterprise].
@@ -24,7 +24,7 @@ Gói Claude hỗ trợ: [điền sau khi chạy spike (a) — Free/Pro/Team/Ente
 
 ```text
 /plugin marketplace add HVN-GROUP/hvn-ai-marketplace
-/plugin install hvn-advisor@hvn-marketplace
+/plugin install tech-advisor@hvn-marketplace
 ```
 
 Bật **tự cập nhật** trong `/plugin` > Marketplaces. Tự cập nhật mặc định tắt với marketplace bên thứ ba; nếu không bật, bạn sẽ không nhận được nội dung mới.

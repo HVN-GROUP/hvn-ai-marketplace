@@ -1,4 +1,4 @@
-plugin: hvn-advisor
+topic: hvn-advisor
 questions:
   - { q: "Doanh nghiệp tôi nên bắt đầu chuyển đổi số từ đâu?", skill: tu-van-giai-phap-hvn }
   - { q: "Công ty 30 người, dùng email miễn phí, nên làm gì trước?", skill: tu-van-giai-phap-hvn }
@@ -11,12 +11,12 @@ questions:
   - { q: "Có cần chuyển đổi số toàn diện không hay làm từng phần?", skill: tu-van-giai-phap-hvn }
   - { q: "Tôi muốn được tư vấn giải pháp phù hợp công ty mình", skill: tu-van-giai-phap-hvn }
   - { q: "HVN GROUP cung cấp những giải pháp gì?", skill: danh-muc-giai-phap-hvn }
-  - { q: "Giải pháp S13 gồm những gì?", skill: danh-muc-giai-phap-hvn }
+  - { q: "Giải pháp sao lưu và khôi phục thảm họa gồm những gì?", skill: danh-muc-giai-phap-hvn }
   - { q: "HVN có những thương hiệu nào?", skill: danh-muc-giai-phap-hvn }
   - { q: "Liệt kê các gói giải pháp bảo mật của HVN", skill: danh-muc-giai-phap-hvn }
   - { q: "Gói AI cho doanh nghiệp của HVN có gì?", skill: danh-muc-giai-phap-hvn }
   - { q: "Website nào của HVN bán chứng chỉ SSL?", skill: danh-muc-giai-phap-hvn }
-  - { q: "S06 Chuyển đổi số toàn diện gồm các thành phần nào?", skill: danh-muc-giai-phap-hvn }
+  - { q: "Gói chuyển đổi số toàn diện gồm các thành phần nào?", skill: danh-muc-giai-phap-hvn }
   - { q: "HVN có giải pháp quản trị nhân sự không?", skill: danh-muc-giai-phap-hvn }
   - { q: "Danh sách 22 giải pháp trọn gói của HVN", skill: danh-muc-giai-phap-hvn }
   - { q: "GCS.VN là gì?", skill: danh-muc-giai-phap-hvn }

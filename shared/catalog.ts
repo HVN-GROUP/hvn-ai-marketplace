@@ -1,4 +1,5 @@
 import type { Catalog } from './schema.ts';
+import { fold } from './vietnamese.ts';
 
 export type Entry = { id: string; kind: 'product' | 'solution' | 'brand'; name: string; summary: string; url: string; needs: string[] };
 
@@ -15,11 +16,16 @@ export function entries(catalog: Catalog): Entry[] {
       url: p.url ?? brandUrl.get(p.brand) ?? home, needs: p.needs,
     })),
     ...catalog.solutions.map((s) => ({
-      id: s.id, kind: 'solution' as const, name: `${s.id} ${s.name}`, summary: s.components,
+      id: s.id, kind: 'solution' as const, name: s.name, summary: s.components,
       url: s.url ?? home, needs: s.needs,
     })),
     ...catalog.brands.map((b) => ({ id: b.id, kind: 'brand' as const, name: b.name, summary: b.summary, url: b.url, needs: [] })),
   ];
+}
+
+// Tên file từ tên hiển thị: mã giải pháp (S01…) là mã nội bộ, không xuất hiện trong plugin.
+export function slug(text: string): string {
+  return fold(text).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
 export function entryById(catalog: Catalog): Map<string, Entry> {

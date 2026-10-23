@@ -29,7 +29,7 @@ jobs:
         run: |
           node scripts/check.ts 2> check.log || true
           {
-            echo "Cập nhật tự động lúc $(date -u +%Y-%m-%d). Người duyệt theo plugin xem CODEOWNERS."
+            echo "Cập nhật tự động lúc $(date -u +%Y-%m-%d). Người duyệt theo chủ đề xem CODEOWNERS."
             echo
             grep '\[freshness\]' check.log | sed 's/^cảnh báo \[freshness\] /- /' || echo "Không có nội dung quá hạn."
           } > body.md

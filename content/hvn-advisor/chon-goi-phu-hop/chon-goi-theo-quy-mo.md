@@ -26,13 +26,16 @@ sources:
 |---|---|---|---|
 | Dưới 10 người | Gói cơ bản của [[hvn:google-workspace]] hoặc [[hvn:microsoft-365]] | Lưu trữ đám mây đi kèm gói | Bật xác minh 2 bước cho mọi tài khoản |
 | 10–50 người | Gói tiêu chuẩn, thêm quản trị tập trung | Thêm [[hvn:acronis-cyber-protect]] cho dữ liệu quan trọng | Thêm [[hvn:kaspersky-endpoint]] |
-| Trên 50 người | Gói nâng cao, có quản lý thiết bị | Sao lưu có cam kết khôi phục rõ ràng | Xem [[hvn:S16]] |
+| Trên 50 người | Gói nâng cao, có quản lý thiết bị | Sao lưu có cam kết khôi phục rõ ràng | Đánh giá an toàn thông tin tổng thể, ví dụ giải pháp [[hvn:S16]] |
 
 ## Gợi ý theo tình huống
 
-- Công ty mới, chưa có email tên miền → bắt đầu với [[hvn:S02]].
+- Công ty mới, chưa có email tên miền → đăng ký tên miền và email doanh nghiệp trước. HVN GROUP có giải pháp [[hvn:S02]] gồm cả hai.
 - Đội ngũ quen Excel và Word → ưu tiên [[hvn:microsoft-365]].
 - Đội ngũ làm việc nhiều trên trình duyệt, cộng tác thời gian thực → ưu tiên [[hvn:google-workspace]].
+- Đã dùng ổn định một hệ sinh thái → giữ nguyên. Chỉ chuyển khi có lý do rõ ràng, vì chuyển đổi tốn công di chuyển dữ liệu và đào tạo lại.
+
+Cả Google Workspace và Microsoft 365 đều đáp ứng tốt doanh nghiệp vừa và nhỏ; khác biệt chính nằm ở thói quen làm việc của đội ngũ.
 
 ## Nguồn
 

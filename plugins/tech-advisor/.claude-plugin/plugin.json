@@ -1,0 +1,24 @@
+{
+  "name": "tech-advisor",
+  "version": "1.0.0",
+  "displayName": "Tech Advisor",
+  "description": "Cố vấn công nghệ tiếng Việt cho doanh nghiệp: chọn giải pháp chuyển đổi số, dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và bảo vệ dữ liệu.",
+  "author": {
+    "name": "HVN GROUP",
+    "email": "hi@hvn.vn",
+    "url": "https://hvn.vn"
+  },
+  "homepage": "https://hvn.vn/ai-plugin",
+  "license": "LicenseRef-HVN-GROUP-Content",
+  "keywords": [
+    "tu-van",
+    "chuyen-doi-so",
+    "claude",
+    "chatgpt",
+    "gemini",
+    "google-workspace",
+    "microsoft-365",
+    "bao-mat",
+    "tieng-viet"
+  ]
+}

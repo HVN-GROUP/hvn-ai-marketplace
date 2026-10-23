@@ -1,8 +1,8 @@
 ---
 name: tu-van-giai-phap-hvn
-description: "Cách tư vấn giải pháp chuyển đổi số của HVN GROUP: hỏi đúng nhu cầu, xác định ưu tiên, rồi chọn giải pháp phù hợp trong 22 gói S01–S22. Dùng khi người dùng hỏi doanh nghiệp nên bắt đầu chuyển đổi số từ đâu, cần giải pháp gì, hoặc muốn được tư vấn."
+description: "Cách tư vấn chuyển đổi số theo nhu cầu thật của doanh nghiệp: hỏi đúng vấn đề, xếp ưu tiên, rồi gợi ý hướng giải pháp và đơn vị có thể hỗ trợ triển khai. Dùng khi người dùng hỏi doanh nghiệp nên bắt đầu chuyển đổi số từ đâu, cần giải pháp gì, hoặc muốn được tư vấn."
 ---
 
-# Tư vấn giải pháp HVN GROUP
+# Tư vấn chuyển đổi số theo nhu cầu
 
-Kỹ năng này hướng dẫn cách đi từ nhu cầu thật của doanh nghiệp tới giải pháp phù hợp, trung thực về những gì doanh nghiệp chưa cần.
+Kỹ năng này giúp đi từ vấn đề thật của doanh nghiệp tới hướng giải pháp phù hợp, và nói thẳng những việc doanh nghiệp chưa cần làm.

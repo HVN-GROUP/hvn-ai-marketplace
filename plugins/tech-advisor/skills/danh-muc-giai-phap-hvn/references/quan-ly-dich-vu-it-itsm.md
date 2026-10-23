@@ -1,0 +1,7 @@
+# Quản lý dịch vụ IT (ITSM)
+
+**Thành phần:** IT Helpdesk + Hỗ trợ từ xa + Device Management
+
+**Phù hợp khi doanh nghiệp cần:** Bảo mật thiết bị đầu cuối
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s20)

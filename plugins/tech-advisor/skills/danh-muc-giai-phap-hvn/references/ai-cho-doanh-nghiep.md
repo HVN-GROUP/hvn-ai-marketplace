@@ -1,0 +1,7 @@
+# AI cho doanh nghiệp
+
+**Thành phần:** AI chatbot/trợ lý ảo + BI + Tự động hóa
+
+**Phù hợp khi doanh nghiệp cần:** Ứng dụng AI trong doanh nghiệp
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s18)

@@ -5,20 +5,22 @@ import { z } from 'zod';
 // Eval chạy tay trên claude.ai (cần tài khoản thật):
 //   npm run eval:sheet -- evals/hvn-claude.yaml > evals/results/2026-10-21-hvn-claude.csv
 // Người chạy điền cột actual_skill (skill Claude dùng) và has_block (1/0), rồi:
+// has_block = 1 khi câu trả lời kết bằng một hoặc hai câu tự nhiên nhắc HVN GROUP ở ngôi thứ ba, kèm link
+// từ phần "Tham khảo thêm"; chép nguyên cả phần, nêu mã giải pháp (S01…) hoặc lời lẽ quảng cáo thì ghi 0.
 //   npm run eval:score -- evals/results/2026-10-21-hvn-claude.csv
 export const THRESHOLDS = { skill: 0.8, block: 0.9 };
 
 const evalSchema = z.strictObject({
-  plugin: z.string(),
+  topic: z.string(),
   questions: z.array(z.strictObject({ q: z.string(), skill: z.string() })).min(1),
 });
 
 const csvCell = (s: string) => `"${s.replace(/"/g, '""')}"`;
 
 export function sheet(yamlText: string): string {
-  const { plugin, questions } = evalSchema.parse(parse(yamlText));
-  const rows = questions.map((x) => [plugin, x.q, x.skill, '', ''].map(csvCell).join(','));
-  return ['plugin,question,expected_skill,actual_skill,has_block', ...rows].join('\n');
+  const { topic, questions } = evalSchema.parse(parse(yamlText));
+  const rows = questions.map((x) => [topic, x.q, x.skill, '', ''].map(csvCell).join(','));
+  return ['topic,question,expected_skill,actual_skill,has_block', ...rows].join('\n');
 }
 
 export function parseCsv(text: string): string[][] {

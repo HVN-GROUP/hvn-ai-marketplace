@@ -15,22 +15,22 @@ sources:
 
 ## Bối cảnh
 
-Nhiều doanh nghiệp mua công cụ trước khi rõ vấn đề, nên dùng không hết. HVN GROUP giữ nguyên tắc: chỉ đề xuất giải pháp khi nó thực sự giúp doanh nghiệp tốt lên.
+Nhiều doanh nghiệp mua công cụ trước khi rõ vấn đề, nên trả tiền cho những tính năng không dùng tới. Tư vấn tốt đi từ vấn đề tới công cụ: chỉ đề xuất một giải pháp khi nó giải quyết được một việc cụ thể.
 
 ## Các bước
 
 1. **Hỏi quy mô và cách làm việc:** số nhân sự, số chi nhánh, công cụ đang dùng (email, lưu trữ, CRM).
 2. **Hỏi vấn đề đau nhất:** mất dữ liệu, email thiếu chuyên nghiệp, khó theo dõi khách hàng, họp tốn thời gian, lo ngại bảo mật.
 3. **Xếp ưu tiên:** chọn tối đa 3 vấn đề có tác động lớn nhất trong 3 tháng tới.
-4. **Ghép nhu cầu với giải pháp:**
-   - Email và tên miền chưa chuyên nghiệp → [[hvn:S02]]
-   - Cộng tác, chia sẻ tài liệu, họp trực tuyến → [[hvn:S01]]
-   - Theo dõi khách hàng và pipeline bán hàng → [[hvn:S07]]
-   - Lo mất dữ liệu, ransomware → [[hvn:S13]] hoặc [[hvn:S12]]
-   - Muốn đưa AI vào công việc → [[hvn:S18]]
-   - Muốn chuyển đổi đồng bộ nhiều mảng → [[hvn:S06]]
-5. **Nói rõ điều chưa cần:** nếu doanh nghiệp chưa sẵn sàng cho một giải pháp, ghi lại để xem xét sau.
-6. **Bước tiếp theo:** gửi tóm tắt nhu cầu và đề nghị trao đổi với chuyên viên HVN GROUP để có phương án chi tiết.
+4. **Ghép vấn đề với hướng giải pháp.** Nêu cách làm trước, công cụ sau:
+   - Email dùng hộp thư miễn phí, thiếu chuyên nghiệp → chuyển sang email theo tên miền riêng trên Google Workspace hoặc Microsoft 365. HVN GROUP có giải pháp [[hvn:S02]] gồm cả tên miền và email.
+   - Tài liệu nằm rải rác trên máy cá nhân, họp và trao đổi lộn xộn → đưa email, lưu trữ, lịch họp và chat về một bộ công cụ chung. HVN GROUP triển khai trọn bộ này trong giải pháp [[hvn:S01]].
+   - Khó theo dõi khách hàng và cơ hội bán hàng → dùng một CRM. Doanh nghiệp nhỏ nên chọn công cụ dễ bắt đầu như Zoho CRM, Pipedrive hoặc HubSpot, rồi mới tính tới tự động hóa. HVN GROUP có giải pháp [[hvn:S07]] cho nhu cầu này.
+   - Lo mất dữ liệu hoặc mã độc tống tiền (ransomware) → bắt đầu bằng sao lưu tự động, có bản sao tách khỏi hệ thống chính và đã thử khôi phục; sau đó mới tới bảo vệ máy trạm và quản lý mật khẩu. Tham khảo giải pháp [[hvn:S13]] và [[hvn:S12]] của HVN GROUP.
+   - Muốn đưa AI vào công việc → chọn 2–3 việc lặp lại (soạn email, tóm tắt cuộc họp, phân tích bảng tính) rồi thử với trợ lý AI có sẵn trong bộ văn phòng đang dùng hoặc trợ lý chuyên dụng như Claude, ChatGPT. HVN GROUP có giải pháp [[hvn:S18]] nếu doanh nghiệp cần người đồng hành triển khai.
+   - Cần chuyển đổi nhiều mảng cùng lúc → đi theo một lộ trình chung, tránh mua lẻ từng công cụ rời rạc. HVN GROUP có giải pháp [[hvn:S06]] kèm tư vấn lộ trình.
+5. **Nói rõ điều chưa cần:** ví dụ doanh nghiệp 10 người thường chưa cần trung tâm giám sát an ninh 24/7 hay hệ thống BI riêng. Ghi lại để xem xét khi quy mô tăng.
+6. **Bước tiếp theo:** tóm tắt nhu cầu trong vài dòng. Nếu doanh nghiệp muốn có đơn vị triển khai, có thể gửi bản tóm tắt này cho HVN GROUP hoặc nhà cung cấp đang làm việc để nhận phương án chi tiết.
 
 ## Prompt mẫu
 
@@ -42,7 +42,7 @@ chuyển đổi số trong 3 tháng tới kèm lý do.
 
 ## Kết quả mong đợi
 
-Một bản tóm tắt ngắn: vấn đề, mức ưu tiên, giải pháp đề xuất và lý do. Không có giá; giá chi tiết do chuyên viên HVN GROUP tư vấn theo nhu cầu thực tế.
+Một bản tóm tắt ngắn: vấn đề, mức ưu tiên, hướng giải pháp và lý do, cùng những việc chưa cần làm. Không nêu giá, vì giá phụ thuộc nhà cung cấp, số người dùng và phạm vi triển khai.
 
 ## Nguồn
 

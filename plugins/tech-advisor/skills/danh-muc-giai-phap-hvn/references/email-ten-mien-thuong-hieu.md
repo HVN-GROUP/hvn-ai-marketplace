@@ -1,0 +1,7 @@
+# Email & Tên miền thương hiệu
+
+**Thành phần:** Email doanh nghiệp + Tên miền & DNS + Email Hosting
+
+**Phù hợp khi doanh nghiệp cần:** Email doanh nghiệp và tên miền
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s02)

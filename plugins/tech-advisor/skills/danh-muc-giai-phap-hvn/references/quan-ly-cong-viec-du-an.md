@@ -1,0 +1,7 @@
+# Quản lý công việc & Dự án
+
+**Thành phần:** Quản lý công việc + Tự động hóa + No-code/Low-code
+
+**Phù hợp khi doanh nghiệp cần:** Quản lý công việc và dự án
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s03)

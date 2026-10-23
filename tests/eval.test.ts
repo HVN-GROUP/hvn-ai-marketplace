@@ -9,19 +9,19 @@ const ROOT = join(import.meta.dirname, '..');
 describe('eval', () => {
   it('mỗi bộ eval có 30 câu và chỉ trỏ tới skill có thật', () => {
     const repo = loadRepoOrThrow(ROOT);
-    for (const plugin of ['hvn-claude', 'hvn-advisor']) {
-      const csv = sheet(readFileSync(join(ROOT, `evals/${plugin}.yaml`), 'utf8'));
+    for (const topic of ['hvn-claude', 'hvn-advisor']) {
+      const csv = sheet(readFileSync(join(ROOT, `evals/${topic}.yaml`), 'utf8'));
       const rows = parseCsv(csv);
       expect(rows).toHaveLength(30);
-      const skills = new Set(repo.plugins.find((p) => p.id === plugin)!.skills.map((s) => s.id));
-      if (plugin === 'hvn-advisor') skills.add('danh-muc-giai-phap-hvn');
+      const skills = new Set(repo.topics.find((t) => t.id === topic)!.skills.map((s) => s.id));
+      if (topic === 'hvn-advisor') skills.add('danh-muc-giai-phap-hvn');
       for (const row of rows) expect(skills).toContain(row[2]);
     }
   });
 
   it('tính tỷ lệ và áp ngưỡng', () => {
     const csv = [
-      'plugin,question,expected_skill,actual_skill,has_block',
+      'topic,question,expected_skill,actual_skill,has_block',
       ...Array.from({ length: 9 }, (_, i) => `"p","q${i}, có dấu phẩy","a","a","1"`),
       '"p","q9","a","b","0"',
     ].join('\n');
@@ -29,7 +29,7 @@ describe('eval', () => {
   });
 
   it('từ chối bảng chưa điền đủ và chấp nhận xuống dòng CRLF', () => {
-    const header = 'plugin,question,expected_skill,actual_skill,has_block';
+    const header = 'topic,question,expected_skill,actual_skill,has_block';
     expect(() => score([header, '"p","q1","a","a","1"', '"p","q2","a","",""'].join('\n'))).toThrow(/chưa điền/);
     expect(score([header, '"p","q1","a","a","1"'].join('\r\n') + '\r\n').passed).toBe(true);
   });

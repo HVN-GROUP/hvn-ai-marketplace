@@ -1,0 +1,7 @@
+# Giao tiếp & Cộng tác doanh nghiệp
+
+**Thành phần:** Email + Quản lý công việc + Lưu trữ đám mây + Hội họp + Chat
+
+**Phù hợp khi doanh nghiệp cần:** Giao tiếp và cộng tác nội bộ, Hội họp trực tuyến
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s01)

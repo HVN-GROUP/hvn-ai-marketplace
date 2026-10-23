@@ -9,7 +9,7 @@ import { buildFromDisk } from '../scripts/build.ts';
 import { loadConfig } from '../shared/load.ts';
 import { createApp, type AppOptions } from '../server/app.ts';
 import { createStore, search, type Store } from '../server/content-store.ts';
-import { fold } from '../server/vietnamese.ts';
+import { fold } from '../shared/vietnamese.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const { index } = buildFromDisk(ROOT);
@@ -75,13 +75,13 @@ describe('MCP qua HTTP', () => {
     expect(Object.fromEntries(url.searchParams)).toEqual({
       utm_source: 'chatgpt', utm_medium: 'ai-plugin', utm_campaign: 'hvn-advisor', utm_content: 'recommend',
     });
-    expect(items[0].provider).toBe('Sản phẩm của HVN GROUP');
+    expect(items[0].provider).toBe('HVN GROUP cung cấp và hỗ trợ triển khai');
   });
 
   it('fetch không có khối gợi ý, không có chỉ dẫn cho model, link sản phẩm mang UTM ChatGPT', async () => {
     const res = await client.callTool({ name: 'fetch', arguments: { id: 'hvn-advisor.tu-van-giai-phap-hvn.quy-trinh-tu-van' } });
     const doc = res.structuredContent as { text: string };
-    expect(doc.text).not.toMatch(/Giải pháp liên quan|hvn-goi-y|nguyên văn khối/);
+    expect(doc.text).not.toMatch(/Tham khảo thêm|Giải pháp liên quan|hvn-goi-y|Cách trả lời/);
     expect(doc.text).toContain('utm_source=chatgpt');
     expect(doc.text).not.toContain('utm_source=claude');
   });

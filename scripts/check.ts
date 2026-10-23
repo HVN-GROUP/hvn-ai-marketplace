@@ -4,9 +4,9 @@ import { join, posix, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { entryById, hvnHosts } from '../shared/catalog.ts';
 import { loadRepo, type Repo } from '../shared/load.ts';
-import { internalLinks, refIds } from '../shared/render.ts';
+import { internalLinks, REF, refIds } from '../shared/render.ts';
 import { CONTENT_TYPES, SLUG as SLUG_RE } from '../shared/schema.ts';
-import { GENERATED_ROOTS, generate, readGenerated } from './build.ts';
+import { CATALOG_SKILL, GENERATED_ROOTS, generate, readGenerated } from './build.ts';
 
 export type Finding = { file: string; rule: string; message: string };
 
@@ -42,6 +42,8 @@ const WHMCS_PATTERNS: [string, RegExp][] = [
   ['số hóa đơn', /\b(?:invoice|hóa\s*đơn)\s*(?:số\s*)?#?\d{4,}/i],
 ];
 const SH = String.raw`(?:sudo\s+)?(?:ba|z|da)?sh\b`;
+const SOLUTION_CODE_RE = /(?<![\p{L}\p{N}])S\d{2}(?![\p{L}\p{N}])/gu;
+
 const DANGEROUS_PATTERNS: [string, RegExp][] = [
   ['tải và chạy script từ xa', new RegExp(String.raw`\b(?:curl|wget)\b[^\n]*\|\s*${SH}`, 'i')],
   ['tải và chạy script từ xa', new RegExp(String.raw`\b${SH}\s*(?:-c\s*["']?\$\(|<\()\s*(?:curl|wget)\b`, 'i')],
@@ -120,6 +122,10 @@ export function checkText(file: string, text: string, ctx: TextContext): Finding
   for (const [label, re] of DANGEROUS_PATTERNS) {
     if (re.test(text)) add('lenh-nguy-hiem', label);
   }
+  // Mã giải pháp (S01…S22) là mã nội bộ: nhắc giải pháp bằng [[hvn:Sxx]] để hiện thành tên.
+  for (const m of text.replace(REF, ' ').matchAll(SOLUTION_CODE_RE)) {
+    add('ma-noi-bo', `mã giải pháp ${m[0]} hiện thành chữ; dùng [[hvn:${m[0]}]]`);
+  }
   return out;
 }
 
@@ -161,15 +167,22 @@ export function checkRepo(repo: Repo): Finding[] {
   }
   for (const n of catalog.needs) out.push(...checkText('catalog/products.yaml', n.label, ctx));
 
-  for (const plugin of repo.plugins) {
-    const pluginFile = `content/${plugin.id}/plugin.yaml`;
-    if (!SLUG_RE.test(plugin.id)) add(pluginFile, 'schema', `tên plugin "${plugin.id}" phải là chữ thường, số và "-"`);
-    for (const t of [plugin.meta.displayName, plugin.meta.description, ...(plugin.meta.keywords ?? [])]) {
-      out.push(...checkText(pluginFile, t, ctx));
-    }
-    const itemFiles = new Set(plugin.skills.flatMap((s) => s.items.map((i) => i.file)));
-    for (const skill of plugin.skills) {
+  for (const t of [repo.plugin.displayName, repo.plugin.description, ...repo.plugin.keywords]) {
+    out.push(...checkText('config/plugin.yaml', t, ctx));
+  }
+
+  // Mọi chủ đề gộp vào một plugin nên tên skill phải duy nhất trên toàn repo.
+  const skillOwner = new Map<string, string>([[CATALOG_SKILL, 'skill danh mục sinh tự động']]);
+  for (const topic of repo.topics) {
+    const topicFile = `content/${topic.id}/topic.yaml`;
+    if (!SLUG_RE.test(topic.id)) add(topicFile, 'schema', `tên chủ đề "${topic.id}" phải là chữ thường, số và "-"`);
+    for (const t of [topic.meta.displayName, topic.meta.description]) out.push(...checkText(topicFile, t, ctx));
+    const itemFiles = new Set(topic.skills.flatMap((s) => s.items.map((i) => i.file)));
+    for (const skill of topic.skills) {
       if (skill.meta.name !== skill.id) add(skill.file, 'skill', `name "${skill.meta.name}" phải trùng tên thư mục "${skill.id}"`);
+      const owner = skillOwner.get(skill.id);
+      if (owner) add(skill.file, 'skill', `tên skill "${skill.id}" đã dùng ở ${owner}; đổi tên để không trùng trong plugin`);
+      else skillOwner.set(skill.id, `chủ đề ${topic.id}`);
       out.push(...checkText(skill.file, skill.intro, ctx), ...checkText(skill.file, skill.meta.description, ctx));
       for (const item of skill.items) {
         if (!SLUG_RE.test(item.id)) add(item.file, 'schema', 'tên file phải là chữ thường, số và "-" (ví dụ cau-hinh-dns.md)');
@@ -240,8 +253,8 @@ export function checkUtm(files: Map<string, string>, repo: Repo): Finding[] {
 
 export function checkFreshness(repo: Repo, today: Date): Finding[] {
   const out: Finding[] = [];
-  for (const plugin of repo.plugins) {
-    for (const skill of plugin.skills) {
+  for (const topic of repo.topics) {
+    for (const skill of topic.skills) {
       for (const item of skill.items) {
         const due = new Date(`${item.meta.reviewed}T00:00:00Z`);
         due.setUTCDate(due.getUTCDate() + item.meta.review_sla_days);
@@ -253,11 +266,11 @@ export function checkFreshness(repo: Repo, today: Date): Finding[] {
 }
 
 export function summarize(repo: Repo): string {
-  const header = `| Plugin | ${CONTENT_TYPES.join(' | ')} | Tổng |`;
-  const rows = repo.plugins.map((p) => {
-    const items = p.skills.flatMap((s) => s.items);
+  const header = `| Chủ đề | ${CONTENT_TYPES.join(' | ')} | Tổng |`;
+  const rows = repo.topics.map((topic) => {
+    const items = topic.skills.flatMap((s) => s.items);
     const counts = CONTENT_TYPES.map((t) => items.filter((i) => i.meta.type === t).length);
-    return `| ${p.id} | ${counts.join(' | ')} | ${items.length} |`;
+    return `| ${topic.id} | ${counts.join(' | ')} | ${items.length} |`;
   });
   return [header, `|${'---|'.repeat(CONTENT_TYPES.length + 2)}`, ...rows].join('\n');
 }

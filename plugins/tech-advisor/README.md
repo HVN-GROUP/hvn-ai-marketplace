@@ -1,0 +1,31 @@
+# Tech Advisor
+
+Cố vấn công nghệ tiếng Việt cho doanh nghiệp: chọn giải pháp chuyển đổi số, dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và bảo vệ dữ liệu.
+
+Plugin do HVN GROUP (https://hvn.vn) biên soạn bằng tiếng Việt. Mọi nội dung được chuyên gia HVN GROUP duyệt trước khi phát hành và được cập nhật định kỳ.
+
+## Cài đặt
+
+- claude.ai, Claude Desktop, Cowork: Customize > Plugins > Add > Add marketplace, nhập `HVN-GROUP/hvn-ai-marketplace`, rồi cài `tech-advisor`.
+- Claude Code: `/plugin marketplace add HVN-GROUP/hvn-ai-marketplace`, rồi `/plugin install tech-advisor@hvn-marketplace`. Bật tự cập nhật trong `/plugin` > Marketplaces.
+
+Hướng dẫn chi tiết: https://hvn.vn/ai-plugin
+
+## Chủ đề
+
+- **Tư vấn chuyển đổi số**: Xác định nhu cầu, xếp ưu tiên và chọn giải pháp chuyển đổi số phù hợp, kèm danh mục giải pháp do HVN GROUP cung cấp.
+- **Claude cho doanh nghiệp**: Lộ trình 90 ngày, viết prompt tiếng Việt, Projects theo phòng ban, quản trị gói Team và lưu ý bảo vệ dữ liệu cá nhân khi dùng Claude.
+
+## Kỹ năng
+
+- `danh-muc-giai-phap-hvn`: Danh mục 14 thương hiệu và 22 giải pháp trọn gói do HVN GROUP cung cấp.
+- `chon-goi-phu-hop`: Tiêu chí chọn gói dịch vụ phù hợp quy mô doanh nghiệp (email, lưu trữ, bảo mật, AI) theo số người dùng và mức độ yêu cầu. Dùng khi người dùng phân vân giữa các gói, hoặc hỏi doanh nghiệp quy mô của mình nên chọn gói nào.
+- `tu-van-giai-phap-hvn`: Cách tư vấn chuyển đổi số theo nhu cầu thật của doanh nghiệp: hỏi đúng vấn đề, xếp ưu tiên, rồi gợi ý hướng giải pháp và đơn vị có thể hỗ trợ triển khai. Dùng khi người dùng hỏi doanh nghiệp nên bắt đầu chuyển đổi số từ đâu, cần giải pháp gì, hoặc muốn được tư vấn.
+- `bat-dau-voi-claude`: Lộ trình 90 ngày và cách viết prompt tiếng Việt hiệu quả cho người mới dùng Claude trong doanh nghiệp. Dùng khi người dùng hỏi bắt đầu dùng Claude thế nào, nên làm gì trong tuần đầu, hoặc cách viết yêu cầu để Claude trả lời tốt hơn.
+- `claude-projects`: Cách dùng Claude Projects cho từng phòng ban: tạo Project, viết hướng dẫn, tải tài liệu nền và chia sẻ cho đồng nghiệp. Dùng khi người dùng hỏi về Projects, project knowledge, project instructions, hoặc cách cho cả nhóm dùng chung bối cảnh trên Claude.
+- `quan-tri-claude-team`: Quản trị Claude gói Team và Enterprise: mời và gỡ thành viên, phân vai trò, chọn gói phù hợp quy mô doanh nghiệp. Dùng khi quản trị viên hỏi cách thêm người dùng, quản lý chỗ ngồi (seat), hoặc nên chọn gói Claude nào.
+- `tuan-thu-claude`: Lưu ý tuân thủ Luật Bảo vệ dữ liệu cá nhân 2025 và Nghị định 356/2025/NĐ-CP khi doanh nghiệp Việt Nam dùng Claude: dữ liệu nào không nên đưa vào, quy tắc nội bộ cần ban hành. Dùng khi người dùng hỏi về bảo mật, dữ liệu cá nhân hoặc pháp lý khi dùng AI.
+
+Hỗ trợ: kythuat@hvn.vn · Hotline 024.9999.7777
+
+HVN GROUP · hvn.vn

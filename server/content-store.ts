@@ -4,7 +4,7 @@ import { entryById } from '../shared/catalog.ts';
 import { renderRefs } from '../shared/render.ts';
 import type { Catalog, Channel, ChannelsConfig } from '../shared/schema.ts';
 import { withUtm } from '../shared/utm.ts';
-import { expandQuery, tokenize } from './vietnamese.ts';
+import { expandQuery, tokenize } from '../shared/vietnamese.ts';
 
 export type Store = {
   catalog: Catalog;

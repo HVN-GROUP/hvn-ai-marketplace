@@ -1,6 +1,6 @@
 {
   "name": "hvn-marketplace",
-  "description": "Plugin hướng dẫn tiếng Việt của HVN GROUP: dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và giải pháp bảo mật.",
+  "description": "Cố vấn công nghệ tiếng Việt cho doanh nghiệp do HVN GROUP phát hành.",
   "owner": {
     "name": "HVN GROUP",
     "email": "hi@hvn.vn",
@@ -8,14 +8,9 @@
   },
   "plugins": [
     {
-      "name": "hvn-advisor",
-      "source": "./plugins/hvn-advisor",
-      "description": "Trợ lý tư vấn của HVN GROUP: giúp doanh nghiệp xác định nhu cầu chuyển đổi số và chọn giải pháp phù hợp trong 14 thương hiệu và 22 giải pháp trọn gói."
-    },
-    {
-      "name": "hvn-claude",
-      "source": "./plugins/hvn-claude",
-      "description": "Hướng dẫn tiếng Việt giúp doanh nghiệp dùng Claude hiệu quả: lộ trình 90 ngày, viết prompt, Projects theo phòng ban, quản trị gói Team và lưu ý bảo vệ dữ liệu cá nhân."
+      "name": "tech-advisor",
+      "source": "./plugins/tech-advisor",
+      "description": "Cố vấn công nghệ tiếng Việt cho doanh nghiệp: chọn giải pháp chuyển đổi số, dùng hiệu quả Claude, ChatGPT, Gemini, Google Workspace, Microsoft 365 và bảo vệ dữ liệu."
     }
   ]
 }

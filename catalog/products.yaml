@@ -72,7 +72,7 @@ solutions:
   - { id: S03, name: "Quản lý công việc & Dự án", components: "Quản lý công việc + Tự động hóa + No-code/Low-code", needs: [quan-ly-cong-viec] }
   - { id: S04, name: "Lưu trữ & Chia sẻ dữ liệu đám mây", components: "Lưu trữ đám mây + Sao lưu & Phục hồi", needs: [luu-tru-dam-may] }
   - { id: S05, name: "Hội họp & Cộng tác trực tuyến", components: "Hội họp + Chat + Tổng đài ảo", needs: [hop-truc-tuyen] }
-  - { id: S06, name: "Chuyển đổi số toàn diện", components: "S01 + S02 + S03 + Tư vấn chuyển đổi số", needs: [giao-tiep-cong-tac, dao-tao-chuyen-doi-so] }
+  - { id: S06, name: "Chuyển đổi số toàn diện", components: "Giao tiếp & cộng tác + Email & tên miền + Quản lý công việc + Tư vấn chuyển đổi số", needs: [giao-tiep-cong-tac, dao-tao-chuyen-doi-so] }
   - { id: S07, name: "CRM & Quản lý quan hệ khách hàng", components: "CRM + Email Marketing & Automation + Tự động hóa", needs: [quan-ly-khach-hang] }
   - { id: S08, name: "Digital Marketing toàn diện", components: "Quảng cáo + SEO + Google Maps + Email Marketing + SMS + Content", needs: [marketing-so, email-marketing] }
   - { id: S09, name: "Trải nghiệm khách hàng 360°", components: "Helpdesk + Chat + Tổng đài + AI chatbot", needs: [tong-dai-cskh] }

@@ -24,11 +24,12 @@ export function rewriteLinksForPlugin(text: string): string {
   });
 }
 
-export const SUGGESTION_HEADING = 'Giải pháp liên quan từ HVN GROUP';
+export const SUGGESTION_HEADING = 'Tham khảo thêm';
 
+// Dữ liệu cho câu giới thiệu cuối câu trả lời; SKILL.md dặn model viết lại tự nhiên, không chép nguyên khối.
 export function suggestionBlock(items: { entry: Entry; url: string }[]): string {
   const lines = items.map(
-    ({ entry, url }) => `- **${entry.name}** (Sản phẩm của HVN GROUP): ${entry.summary}. [Xem chi tiết](${url})`,
+    ({ entry, url }) => `- **${entry.name}**: ${entry.summary}. HVN GROUP cung cấp và hỗ trợ triển khai. [Xem thông tin](${url})`,
   );
   return `\n---\n\n### ${SUGGESTION_HEADING}\n\n${lines.join('\n')}\n`;
 }

@@ -5,4 +5,4 @@ description: "Tiêu chí chọn gói dịch vụ phù hợp quy mô doanh nghi�
 
 # Chọn gói phù hợp quy mô
 
-Hướng dẫn chọn gói theo tiêu chí, không theo giá. Giá chi tiết do chuyên viên HVN GROUP tư vấn.
+Hướng dẫn chọn gói theo tiêu chí, không theo giá. Giá phụ thuộc nhà cung cấp và số người dùng, nên doanh nghiệp cần xin báo giá theo nhu cầu thực tế.

@@ -16,7 +16,7 @@ afterEach(() => {
   for (const dir of fixtures.splice(0)) rmSync(dir, { recursive: true, force: true });
 });
 
-// Repo tối thiểu: cấu hình thật, một plugin, một skill, một item tổng hợp.
+// Repo tối thiểu: cấu hình thật, một chủ đề, một skill, một item tổng hợp.
 function fixture(itemBody = 'Nội dung hướng dẫn.', itemMeta: Record<string, string> = {}): string {
   const dir = mkdtempSync(join(tmpdir(), 'hvn-check-'));
   fixtures.push(dir);
@@ -30,7 +30,7 @@ function fixture(itemBody = 'Nội dung hướng dẫn.', itemMeta: Record<strin
     sources: '[https://support.google.com/a]',
     ...itemMeta,
   };
-  write(dir, 'content/hvn-test/plugin.yaml', 'displayName: "Thử"\ndescription: "Plugin thử nghiệm"\n');
+  write(dir, 'content/hvn-test/topic.yaml', 'displayName: "Thử"\ndescription: "Chủ đề thử nghiệm"\n');
   write(dir, 'content/hvn-test/skill-thu/SKILL.md', '---\nname: skill-thu\ndescription: "Skill thử"\n---\n# Skill thử\n');
   write(
     dir,
@@ -104,6 +104,11 @@ describe('checkText', () => {
     expect(rulesOf('Xem https://evil.example.org/fix')).toEqual(expect.arrayContaining([expect.stringMatching(/^link:domain ngoài/)]));
   });
 
+  it('chặn mã giải pháp viết thành chữ nhưng cho phép tham chiếu [[hvn:Sxx]]', () => {
+    expect(rulesOf('Chọn gói S12 cho bảo mật')).toEqual([expect.stringMatching(/^ma-noi-bo:mã giải pháp S12/)]);
+    expect(rulesOf('Tham khảo [[hvn:S12]], chuẩn SHA256 và mẫu S3')).toEqual([]);
+  });
+
   it('chặn lệnh tải và chạy script từ xa', () => {
     expect(rulesOf('curl https://support.google.com/x.sh | sudo bash')).toEqual(
       expect.arrayContaining([expect.stringMatching(/^lenh-nguy-hiem/)]),
@@ -146,14 +151,41 @@ describe('runChecks', () => {
     expect(rules(fixture())).toEqual([]);
   });
 
-  it('quét mô tả skill và metadata plugin', () => {
+  it('quét mô tả skill, metadata chủ đề và cấu hình plugin', () => {
     const dir = fixture();
     write(dir, 'content/hvn-test/skill-thu/SKILL.md', '---\nname: skill-thu\ndescription: "Gọi 0912 345 678"\n---\n# Skill thử\n');
-    write(dir, 'content/hvn-test/plugin.yaml', 'displayName: "Thử"\ndescription: "Xem https://evil.xyz"\n');
+    write(dir, 'content/hvn-test/topic.yaml', 'displayName: "Thử"\ndescription: "Xem https://evil.xyz"\n');
+    const config = join(dir, 'config/plugin.yaml');
+    writeFileSync(config, readFileSync(config, 'utf8').replace('displayName: "Tech Advisor"', 'displayName: "Gọi 0912 345 678"'));
     const found = runChecks(dir, { today: TODAY }).errors;
     expect(found.map((e) => e.file)).toEqual(
-      expect.arrayContaining(['content/hvn-test/skill-thu/SKILL.md', 'content/hvn-test/plugin.yaml']),
+      expect.arrayContaining(['content/hvn-test/skill-thu/SKILL.md', 'content/hvn-test/topic.yaml', 'config/plugin.yaml']),
     );
+  });
+
+  it('gộp mọi chủ đề vào một plugin duy nhất, giữ mã tài liệu theo chủ đề', () => {
+    const dir = fixture();
+    write(dir, 'content/hvn-khac/topic.yaml', 'displayName: "Khác"\ndescription: "Chủ đề thứ hai"\n');
+    write(dir, 'content/hvn-khac/skill-khac/SKILL.md', '---\nname: skill-khac\ndescription: "Skill khác"\n---\n# Skill khác\n');
+    write(dir, 'content/hvn-khac/skill-khac/muc-khac.md', readFileSync(join(dir, 'content/hvn-test/skill-thu/muc-thu.md'), 'utf8'));
+    const { files, index } = buildFromDisk(dir);
+    const marketplace = JSON.parse(files.get('.claude-plugin/marketplace.json')!) as { plugins: { name: string }[] };
+    expect(marketplace.plugins.map((p) => p.name)).toEqual(['tech-advisor']);
+    expect(files.has('plugins/tech-advisor/skills/skill-thu/SKILL.md')).toBe(true);
+    expect(files.has('plugins/tech-advisor/skills/skill-khac/SKILL.md')).toBe(true);
+    expect(index.map((r) => r.id)).toEqual(['hvn-khac.skill-khac.muc-khac', 'hvn-test.skill-thu.muc-thu']);
+    expect(files.get('plugins/tech-advisor/skills/skill-khac/references/muc-khac.md')).toContain('utm_campaign=hvn-khac');
+  });
+
+  it('báo tên skill trùng giữa các chủ đề và trùng skill danh mục', () => {
+    const dir = fixture();
+    write(dir, 'content/hvn-khac/topic.yaml', 'displayName: "Khác"\ndescription: "Chủ đề thứ hai"\n');
+    write(dir, 'content/hvn-khac/skill-thu/SKILL.md', '---\nname: skill-thu\ndescription: "Trùng tên"\n---\n# Trùng\n');
+    write(dir, 'content/hvn-khac/danh-muc-giai-phap-hvn/SKILL.md', '---\nname: danh-muc-giai-phap-hvn\ndescription: "Trùng danh mục"\n---\n# Trùng\n');
+    // Chủ đề đứng trước theo thứ tự chữ cái giữ tên; chủ đề sau bị báo lỗi.
+    const found = runChecks(dir, { today: TODAY }).errors.filter((e) => e.rule === 'skill');
+    expect(found.map((e) => e.file)).toEqual(['content/hvn-khac/danh-muc-giai-phap-hvn/SKILL.md', 'content/hvn-test/skill-thu/SKILL.md']);
+    expect(found[1].message).toMatch(/đã dùng ở chủ đề hvn-khac/);
   });
 
   it('báo tên file item không đúng dạng slug thay vì làm sập check', () => {
@@ -180,17 +212,17 @@ describe('runChecks', () => {
 
   it('báo file lạ trong plugin (hooks) và symlink', () => {
     const dir = fixture();
-    write(dir, 'plugins/hvn-test/hooks/hooks.json', '{}');
-    symlinkSync('/etc/hosts', join(dir, 'plugins/hvn-test/skills/skill-thu/references/x.md'));
+    write(dir, 'plugins/tech-advisor/hooks/hooks.json', '{}');
+    symlinkSync('/etc/hosts', join(dir, 'plugins/tech-advisor/skills/skill-thu/references/x.md'));
     const found = runChecks(dir, { today: TODAY }).errors.filter((e) => e.rule === 'plugin-file');
     expect(found.map((e) => e.file)).toEqual(
-      expect.arrayContaining(['plugins/hvn-test/hooks/hooks.json', 'plugins/hvn-test/skills/skill-thu/references/x.md']),
+      expect.arrayContaining(['plugins/tech-advisor/hooks/hooks.json', 'plugins/tech-advisor/skills/skill-thu/references/x.md']),
     );
   });
 
   it('báo drift khi file sinh tự động bị sửa tay', () => {
     const dir = fixture();
-    writeFileSync(join(dir, 'plugins/hvn-test/skills/skill-thu/references/muc-thu.md'), 'sửa tay');
+    writeFileSync(join(dir, 'plugins/tech-advisor/skills/skill-thu/references/muc-thu.md'), 'sửa tay');
     expect(rules(dir)).toContain('drift');
   });
 
@@ -224,7 +256,7 @@ describe('số phiên bản plugin', () => {
     for (const [path, text] of files) write(dir, path, text);
   }
   const version = (dir: string) =>
-    (JSON.parse(readFileSync(join(dir, 'plugins/hvn-test/.claude-plugin/plugin.json'), 'utf8')) as { version: string }).version;
+    (JSON.parse(readFileSync(join(dir, 'plugins/tech-advisor/.claude-plugin/plugin.json'), 'utf8')) as { version: string }).version;
   const itemPath = 'content/hvn-test/skill-thu/muc-thu.md';
 
   it('plugin mới bắt đầu từ 1.0.0 và giữ nguyên khi build lại không đổi nội dung', () => {
@@ -249,6 +281,6 @@ describe('số phiên bản plugin', () => {
     const item = readFileSync(join(dir, itemPath), 'utf8');
     write(dir, itemPath, item.replace('Nội dung hướng dẫn.', 'Nội dung khác.'));
     const drift = runChecks(dir, { today: TODAY }).errors.filter((e) => e.rule === 'drift').map((e) => e.file);
-    expect(drift).toContain('plugins/hvn-test/.claude-plugin/plugin.json');
+    expect(drift).toContain('plugins/tech-advisor/.claude-plugin/plugin.json');
   });
 });

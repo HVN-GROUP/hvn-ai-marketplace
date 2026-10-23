@@ -19,7 +19,7 @@ Chính sách áp dụng cho các plugin AI do CÔNG TY CỔ PHẦN TẬP ĐOÀN 
 - Chúng tôi **không** lưu địa chỉ IP. Máy chủ không bật nhật ký truy cập.
 - Chúng tôi ghi nhật ký kỹ thuật gồm: thời điểm, tên kênh (ví dụ "chatgpt"), mã trạng thái, thời gian xử lý, tên công cụ được gọi, và số kết quả trả về. Các thông tin này không định danh được bạn.
 
-**Liên kết sang website HVN GROUP:** các liên kết trong plugin có gắn tham số UTM (ví dụ `utm_source=claude`) để chúng tôi biết lượt truy cập đến từ plugin nào. Khi bạn mở liên kết, website HVN GROUP dùng Google Analytics 4 để đo lường truy cập theo chính sách quyền riêng tư của website.
+**Liên kết sang website HVN GROUP:** các liên kết trong plugin có gắn tham số UTM (ví dụ `utm_source=claude`) để chúng tôi biết lượt truy cập đến từ kênh và chủ đề nào. Khi bạn mở liên kết, website HVN GROUP dùng Google Analytics 4 để đo lường truy cập theo chính sách quyền riêng tư của website.
 
 ## 3. Mục đích
 

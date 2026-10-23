@@ -1,0 +1,7 @@
+# Zero Trust & Quản lý thiết bị
+
+**Thành phần:** Zero Trust & Identity + MDM + Password management
+
+**Phù hợp khi doanh nghiệp cần:** Quản lý mật khẩu và danh tính, Bảo mật thiết bị đầu cuối
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s14)

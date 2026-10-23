@@ -1,0 +1,7 @@
+# Quản trị nhân sự số
+
+**Thành phần:** HRM + Quản lý công việc + Tự động hóa
+
+**Phù hợp khi doanh nghiệp cần:** Quản lý công việc và dự án, Tự động hóa quy trình
+
+[Xem thông tin giải pháp trên website HVN GROUP](https://hvn.vn/?utm_source=claude&utm_medium=ai-plugin&utm_campaign=hvn-advisor&utm_content=hvn-advisor.danh-muc-giai-phap-hvn.s21)
